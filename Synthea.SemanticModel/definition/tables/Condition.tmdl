@@ -1,8 +1,17 @@
 table Condition
 	lineageTag: 74a104c7-4247-4189-96b9-f6e9f41e01ea
 
-	measure 'Patient Condition Count'
+	measure 'Patient Condition Count' = COUNT('Condition'[id])
+		formatString: 0
 		lineageTag: e26310ea-748f-42e8-a189-bcc040e489e7
+
+	measure 'Condition Patient Count' = DISTINCTCOUNT('Condition'[PatientID])
+		formatString: 0
+		lineageTag: ffc2123e-e37c-4d60-a29b-141ca7f46f90
+
+	measure 'Condition Count' = COUNT('Condition'[id])
+		formatString: 0
+		lineageTag: 7d238ddb-eb86-4d2d-8ab6-794f734b2b17
 
 	column id
 		dataType: string
@@ -148,6 +157,23 @@ table Condition
 		lineageTag: e33a783d-9b8c-4fd8-9aca-112bd40d1874
 		summarizeBy: none
 		sourceColumn: encounter.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semantic Tag' =
+			
+			VAR _display = TRIM ( 'Condition'[code.coding.display] )
+			VAR _openCount = LEN ( _display ) - LEN ( SUBSTITUTE ( _display, "(", "" ) )
+			RETURN
+			    IF (
+			        _openCount = 0 || RIGHT ( _display, 1 ) <> ")",
+			        "No tag",
+			        VAR _marked = SUBSTITUTE ( _display, "(", "|", _openCount )
+			        VAR _start = FIND ( "|", _marked )
+			        RETURN MID ( _display, _start + 1, LEN ( _display ) - _start - 1 )
+			    )
+		lineageTag: 8736fdcf-7bd8-4693-944f-658781bec89a
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "6d8ecdbc78270a15c15a",
+  "name": "843d37799347d08c4b5a",
   "position": {
-    "x": 1094.078212290503,
+    "x": 767.5949367088607,
     "y": 0,
-    "z": 5000,
-    "height": 123.35195530726259,
-    "width": 176.9832402234637,
-    "tabOrder": 5000
+    "z": 6003,
+    "height": 123.54430379746834,
+    "width": 326.07594936708858,
+    "tabOrder": 6003
   },
   "visual": {
     "visualType": "cardVisual",
@@ -17,18 +17,22 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "Patient"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Patient"
+                        }
+                      },
+                      "Property": "Active Condition Count"
                     }
                   },
-                  "Property": "PatientCount"
+                  "Function": 1
                 }
               },
-              "queryRef": "Patient.PatientCount",
-              "nativeQueryRef": "Patient Count",
-              "displayName": "Patient Count"
+              "queryRef": "Sum(Patient.Active Condition Count)",
+              "nativeQueryRef": "Average of Active Condition Count"
             }
           ]
         }
@@ -37,13 +41,18 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Aggregation": {
                 "Expression": {
-                  "SourceRef": {
-                    "Entity": "Patient"
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Patient"
+                      }
+                    },
+                    "Property": "Active Condition Count"
                   }
                 },
-                "Property": "PatientCount"
+                "Function": 1
               }
             },
             "direction": "Descending"
@@ -110,15 +119,20 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "c120fd642be3fecc745e",
+        "name": "d4dc920f1a706b5f1936",
         "field": {
-          "Measure": {
+          "Aggregation": {
             "Expression": {
-              "SourceRef": {
-                "Entity": "Patient"
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Patient"
+                  }
+                },
+                "Property": "Active Condition Count"
               }
             },
-            "Property": "PatientCount"
+            "Function": 1
           }
         },
         "type": "Advanced"

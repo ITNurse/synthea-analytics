@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "7bc210e8d72e6a3859f8",
+  "name": "34bd6e67d7d5e6d7d276",
   "position": {
-    "x": 650.83798882681572,
-    "y": 123.35195530726259,
-    "z": 3000,
-    "height": 280,
-    "width": 300,
-    "tabOrder": 3000
+    "x": 819.24050632911394,
+    "y": 414.17721518987338,
+    "z": 6006,
+    "height": 295.69620253164555,
+    "width": 451.64556962025313,
+    "tabOrder": 6006
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,16 +20,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient"
+                      "Entity": "Condition"
                     }
                   },
-                  "Property": "communication.language.coding.code"
+                  "Property": "code.coding.display"
                 }
               },
-              "queryRef": "Patient.communication.language.coding.code",
-              "nativeQueryRef": "Language",
-              "active": true,
-              "displayName": "Language"
+              "queryRef": "Condition.code.coding.display",
+              "nativeQueryRef": "code.coding.display",
+              "active": true
             }
           ]
         },
@@ -40,14 +39,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient"
+                      "Entity": "Condition"
                     }
                   },
-                  "Property": "PatientCount"
+                  "Property": "Patient Condition Count"
                 }
               },
-              "queryRef": "Patient.PatientCount",
-              "nativeQueryRef": "PatientCount"
+              "queryRef": "Condition.Patient Condition Count",
+              "nativeQueryRef": "Patient Condition Count"
             }
           ]
         }
@@ -59,10 +58,10 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Patient"
+                    "Entity": "Condition"
                   }
                 },
-                "Property": "PatientCount"
+                "Property": "Patient Condition Count"
               }
             },
             "direction": "Descending"
@@ -74,22 +73,7 @@
     "objects": {
       "labels": [
         {
-          "properties": {
-            "labelStyle": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Percent of total'"
-                }
-              }
-            },
-            "percentageLabelPrecision": {
-              "expr": {
-                "Literal": {
-                  "Value": "0L"
-                }
-              }
-            }
-          }
+          "properties": {}
         }
       ],
       "legend": [
@@ -111,6 +95,19 @@
             }
           }
         }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -121,6 +118,13 @@
               "expr": {
                 "Literal": {
                   "Value": "12D"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Morphologic Abnormality Condition Count by Patient'"
                 }
               }
             }
@@ -168,5 +172,70 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "baead6b7992a3e4fbe1a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Condition"
+              }
+            },
+            "Property": "code.coding.display"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "Condition",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Contains": {
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c"
+                        }
+                      },
+                      "Property": "code.coding.display"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "'morphologic abnormality'"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "353ecf7ad5c82ae96d57",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Condition"
+              }
+            },
+            "Property": "Patient Condition Count"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

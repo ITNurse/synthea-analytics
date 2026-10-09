@@ -1,9 +1,14 @@
 table Patient
 	lineageTag: 979a8569-3f45-4af9-b98e-c8d7f9a890b7
 
-	measure PatientCount = COUNT(Patient[id])
+	measure PatientCount = DISTINCTCOUNT(Patient[id])
 		formatString: 0
 		lineageTag: 46cbab4c-3854-4ab1-b0b1-a38fe8bfea39
+
+	measure 'Avg Active Condition Count' = AVERAGE(Patient[Active Condition Count])
+		lineageTag: 5a8dbaff-3ca2-4bce-a899-2bc866cb86ed
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column id
 		dataType: string
@@ -250,6 +255,18 @@ table Patient
 	column Patient_Name = Patient[name.family] & ", " & Patient[name.given]
 		lineageTag: 9ff25dfb-0ba7-4290-bb0c-847a9424b252
 		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active Condition Count' =
+			
+			CALCULATE (
+			    COUNTROWS ( 'Condition' ),
+			    'Condition'[clinicalStatus.coding.code] = "active"
+			) + 0
+		formatString: 0
+		lineageTag: 272be8c9-09d0-42ad-9157-3546d150bddb
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 

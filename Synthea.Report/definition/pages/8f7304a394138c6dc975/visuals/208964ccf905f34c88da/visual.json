@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "2f6bf59283989d2d0dbb",
+  "name": "208964ccf905f34c88da",
   "position": {
-    "x": 11.139240506329113,
+    "x": 349.36708860759489,
     "y": 123.54430379746834,
-    "z": 0,
+    "z": 6001,
     "height": 279.49367088607596,
-    "width": 325.0632911392405,
-    "tabOrder": 0
+    "width": 460.75949367088606,
+    "tabOrder": 6001
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient"
+                      "Entity": "Condition"
                     }
                   },
-                  "Property": "Active Condition Count"
+                  "Property": "code.coding.display"
                 }
               },
-              "queryRef": "Patient.Active Condition Count",
-              "nativeQueryRef": "Sum of Active Condition Count",
+              "queryRef": "Condition.code.coding.display",
+              "nativeQueryRef": "code.coding.display",
               "active": true
             }
           ]
@@ -39,14 +39,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient"
+                      "Entity": "Condition"
                     }
                   },
-                  "Property": "PatientCount"
+                  "Property": "Patient Condition Count"
                 }
               },
-              "queryRef": "Patient.PatientCount",
-              "nativeQueryRef": "PatientCount"
+              "queryRef": "Condition.Patient Condition Count",
+              "nativeQueryRef": "Patient Condition Count"
             }
           ]
         }
@@ -58,10 +58,10 @@
               "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Patient"
+                    "Entity": "Condition"
                   }
                 },
-                "Property": "PatientCount"
+                "Property": "Patient Condition Count"
               }
             },
             "direction": "Descending"
@@ -87,19 +87,6 @@
               }
             },
             "showTitle": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "categoryAxis": [
-        {
-          "properties": {
-            "showAxisTitle": {
               "expr": {
                 "Literal": {
                   "Value": "false"
@@ -137,7 +124,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Condition Count by Patient'"
+                  "Value": "'Disorder Condition Count by Patient'"
                 }
               }
             }
@@ -189,29 +176,62 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "632f4a7fee52d39a8789",
+        "name": "e15c39b39c23372c5cb1",
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient"
+                "Entity": "Condition"
               }
             },
-            "Property": "Active Condition Count"
+            "Property": "code.coding.display"
           }
         },
-        "type": "Advanced"
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "Condition",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Contains": {
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c"
+                        }
+                      },
+                      "Property": "code.coding.display"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "'(disorder)'"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
       },
       {
-        "name": "29ce8f8b9b3f8557d2f7",
+        "name": "f1f8777d8cc7b3e50c8c",
         "field": {
           "Measure": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient"
+                "Entity": "Condition"
               }
             },
-            "Property": "PatientCount"
+            "Property": "Patient Condition Count"
           }
         },
         "type": "Advanced"
