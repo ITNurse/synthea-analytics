@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "1f617ca886f35a5f44d0",
+  "name": "2a7cbb68af7a7e3a753d",
   "position": {
-    "x": 9.8773859652377158,
-    "y": 395.85523752991156,
-    "z": 1,
-    "height": 324.43413901203883,
-    "width": 1270.3837949136509,
-    "tabOrder": 1
+    "x": 9.5246584633271976,
+    "y": 331.77560313923067,
+    "z": 1000,
+    "height": 388.12983238058325,
+    "width": 1270.7481833155703,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "tableEx",
@@ -98,9 +98,68 @@
               },
               "queryRef": "Sum(ObservationComponent_FHIR.component.valueQuantity.value)",
               "nativeQueryRef": "component.valueQuantity.value"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ObservationComponent_FHIR"
+                    }
+                  },
+                  "Property": "component.valueQuantity.code"
+                }
+              },
+              "queryRef": "ObservationComponent_FHIR.component.valueQuantity.code",
+              "nativeQueryRef": "component.valueQuantity.code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ObservationComponent_FHIR"
+                    }
+                  },
+                  "Property": "component.valueString"
+                }
+              },
+              "queryRef": "ObservationComponent_FHIR.component.valueString",
+              "nativeQueryRef": "component.valueString"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ObservationComponent_FHIR"
+                    }
+                  },
+                  "Property": "component.valueCodeableConcept.coding.display"
+                }
+              },
+              "queryRef": "ObservationComponent_FHIR.component.valueCodeableConcept.coding.display",
+              "nativeQueryRef": "component.valueCodeableConcept.coding.display"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "ObservationComponent_FHIR"
+                  }
+                },
+                "Property": "component.valueQuantity.code"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "objects": {
@@ -110,13 +169,41 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "332.44930521931104D"
+                  "Value": "212.75885213961914D"
                 }
               }
             }
           },
           "selector": {
             "metadata": "ObservationComponent_FHIR.component.code.coding.display"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "108.63563102908597D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(ObservationComponent_FHIR.component.valueQuantity.value)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "99.27806260629242D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ObservationComponent_FHIR.component.code.coding.code"
           }
         }
       ],
@@ -126,94 +213,28 @@
         }
       ]
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Observation Component'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "baa5c05ad0981c570810",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Patient_FHIR"
-              }
-            },
-            "Property": "name.family"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "dd40eb58dffdee8b77dd",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Patient_FHIR"
-              }
-            },
-            "Property": "name.given"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "5875ddcd50637330110a",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "ObservationComponent_FHIR"
-              }
-            },
-            "Property": "ObservationID"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "de4a5e2cf77cb89c5331",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "ObservationComponent_FHIR"
-              }
-            },
-            "Property": "component.code.coding.code"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "72bd133ed101d56f659b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "ObservationComponent_FHIR"
-              }
-            },
-            "Property": "component.code.coding.display"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "3b08a0e570261f246ca2",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "ObservationComponent_FHIR"
-              }
-            },
-            "Property": "component.valueQuantity.value"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
