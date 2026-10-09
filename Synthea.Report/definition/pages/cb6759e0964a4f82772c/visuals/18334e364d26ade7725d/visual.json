@@ -1,0 +1,340 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "18334e364d26ade7725d",
+  "position": {
+    "x": 0,
+    "y": 80,
+    "z": 0,
+    "height": 640,
+    "width": 1269.873417721519,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient"
+                    }
+                  },
+                  "Property": "name.family"
+                }
+              },
+              "queryRef": "Patient.name.family",
+              "nativeQueryRef": "name.family"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient"
+                    }
+                  },
+                  "Property": "name.given"
+                }
+              },
+              "queryRef": "Patient.name.given",
+              "nativeQueryRef": "name.given"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "reasonCode.coding.display"
+                }
+              },
+              "queryRef": "MedicationRequest.reasonCode.coding.display",
+              "nativeQueryRef": "reasonCode.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "intent"
+                }
+              },
+              "queryRef": "MedicationRequest.intent",
+              "nativeQueryRef": "intent"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "medicationCodeableConcept.coding.display"
+                }
+              },
+              "queryRef": "MedicationRequest.medicationCodeableConcept.coding.display",
+              "nativeQueryRef": "medicationCodeableConcept.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "dosageInstruction.text"
+                }
+              },
+              "queryRef": "MedicationRequest.dosageInstruction.text",
+              "nativeQueryRef": "dosageInstruction.text"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "dosageInstruction.sequence"
+                }
+              },
+              "queryRef": "Sum(MedicationRequest.dosageInstruction.sequence)",
+              "nativeQueryRef": "dosageInstruction.sequence"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "category.coding.display"
+                }
+              },
+              "queryRef": "MedicationRequest.category.coding.display",
+              "nativeQueryRef": "category.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "dosageInstruction.additionalInstruction.coding.display"
+                }
+              },
+              "queryRef": "MedicationRequest.dosageInstruction.additionalInstruction.coding.display",
+              "nativeQueryRef": "dosageInstruction.additionalInstruction.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedicationRequest"
+                    }
+                  },
+                  "Property": "dosageInstruction.doseAndRate.type.coding.display"
+                }
+              },
+              "queryRef": "MedicationRequest.dosageInstruction.doseAndRate.type.coding.display",
+              "nativeQueryRef": "dosageInstruction.doseAndRate.type.coding.display"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "356.75806607886835D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "MedicationRequest.medicationCodeableConcept.coding.display"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Procedure'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6ea6ca5bd6183d6e96ce",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "code.coding.code"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "4e232e76c27bbcad1b93",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "code.coding.display"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "78a4f9da93e0455d22bb",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "DurationMinutes"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "e7b6f0a510b7e9720e18",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "604b310cab0a1527c9ca",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6a171c76227a4358d575",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "performedPeriod.end"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "b1a50826c3b81fbd84ab",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "performedPeriod.start"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "0ca4426c55567aaba365",
+        "ordinal": 7,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}

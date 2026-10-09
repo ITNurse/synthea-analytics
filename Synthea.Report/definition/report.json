@@ -2,20 +2,20 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
   "themeCollection": {
     "baseTheme": {
-      "name": "CY24SU10",
+      "name": "CY26SU05",
       "reportVersionAtImport": {
-        "visual": "1.8.98",
-        "report": "2.0.98",
-        "page": "1.3.98"
+        "visual": "2.9.0",
+        "report": "3.3.0",
+        "page": "2.3.1"
       },
       "type": "SharedResources"
     },
     "customTheme": {
-      "name": "Solar",
+      "name": "AccessibleDefault",
       "reportVersionAtImport": {
-        "visual": "1.8.98",
-        "report": "2.0.98",
-        "page": "1.3.98"
+        "visual": "2.9.0",
+        "report": "3.3.0",
+        "page": "2.3.1"
       },
       "type": "SharedResources"
     }
@@ -40,7 +40,7 @@
           "expanded": {
             "expr": {
               "Literal": {
-                "Value": "true"
+                "Value": "false"
               }
             }
           }
@@ -54,14 +54,14 @@
       "type": "SharedResources",
       "items": [
         {
-          "name": "CY24SU10",
-          "path": "BaseThemes/CY24SU10.json",
-          "type": "BaseTheme"
+          "name": "AccessibleDefault",
+          "path": "BuiltInThemes/AccessibleDefault.json",
+          "type": "CustomTheme"
         },
         {
-          "name": "Solar",
-          "path": "BuiltInThemes/Solar.json",
-          "type": "CustomTheme"
+          "name": "CY26SU05",
+          "path": "BaseThemes/CY26SU05.json",
+          "type": "BaseTheme"
         }
       ]
     },

@@ -1,6 +1,10 @@
 table Patient
 	lineageTag: 979a8569-3f45-4af9-b98e-c8d7f9a890b7
 
+	measure PatientCount = COUNT(Patient[id])
+		formatString: 0
+		lineageTag: 46cbab4c-3854-4ab1-b0b1-a38fe8bfea39
+
 	column id
 		dataType: string
 		lineageTag: 3207e478-6144-4ccb-b3dc-ce3e7962850e

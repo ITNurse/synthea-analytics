@@ -18,21 +18,49 @@ relationship bf978c4e-fd53-3811-b394-d33c751c6d3a
 	fromColumn: Encounter.PatientID
 	toColumn: Patient.id
 
-relationship AutoDetected_f7cf86f7-1b26-4174-aefd-cf6e3f636b7f
-	isActive: false
-	fromColumn: DiagnosticReport.EncounterID
-	toColumn: Encounter.id
-
 relationship AutoDetected_3437bd54-1c70-43da-9203-a2d0606ec05b
 	fromColumn: DiagnosticReport.PatientID
 	toColumn: Patient.id
 
 relationship AutoDetected_2f8afbf3-dd0f-4aae-b8ef-2e30cbc35e90
+	isActive: false
 	fromColumn: Procedure.EncounterID
 	toColumn: Encounter.id
 
 relationship AutoDetected_7eaa6469-c523-4efe-a6ab-ffdf7cc9ba33
-	isActive: false
 	fromColumn: Procedure.PatientID
 	toColumn: Patient.id
+
+relationship AutoDetected_3a7c7055-c134-42a8-b539-c705f2a39705
+	isActive: false
+	fromColumn: MedicationRequest.EncounterID
+	toColumn: Encounter.id
+
+relationship AutoDetected_8c5fe9d9-c637-434b-a5ba-e01ec16c9c8d
+	fromColumn: MedicationRequest.PatientID
+	toColumn: Patient.id
+
+relationship 70c2ba4e-df27-1e28-f2bd-12efdf41bd7e
+	fromColumn: DiagnosticReportResult.DiagnosticReportID
+	toColumn: DiagnosticReport.id
+
+relationship 0ce39fd8-2cde-e60e-98f6-684661dc7976
+	isActive: false
+	fromColumn: Observation.EncounterID
+	toColumn: Encounter.id
+
+relationship cb18fb5c-d8ea-0899-d4f8-f02a0eea6679
+	isActive: false
+	fromColumn: Condition.EncounterID
+	toColumn: Encounter.id
+
+relationship 48c2df33-5b2e-2ef1-36fa-98c17bda92eb
+	isActive: false
+	fromColumn: Immunization.EncounterID
+	toColumn: Encounter.id
+
+relationship 8ddce264-9e06-b7fa-bfc9-d8f1ea0c7e4d
+	isActive: false
+	fromColumn: DiagnosticReport.EncounterID
+	toColumn: Encounter.id
 

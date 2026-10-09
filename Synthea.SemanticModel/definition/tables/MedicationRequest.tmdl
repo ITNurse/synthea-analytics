@@ -1,0 +1,514 @@
+table MedicationRequest
+	lineageTag: 7d6275ed-531b-4dbe-a765-00f61536c082
+
+	column id
+		dataType: string
+		lineageTag: 9d9d946d-7624-4cf9-8f25-89ac409c536e
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: string
+		lineageTag: 759ddf9e-6f67-4c14-87c6-6814e3f0c1f1
+		summarizeBy: none
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EncounterID
+		dataType: string
+		lineageTag: 442b94b6-1f49-4d0e-af3f-6a4e3822ae5b
+		summarizeBy: none
+		sourceColumn: EncounterID
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 335b3c30-1121-4c53-b8fe-17141a0a88b6
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column intent
+		dataType: string
+		lineageTag: 9edbef92-7c94-4088-aa6e-cef10e956024
+		summarizeBy: none
+		sourceColumn: intent
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'medicationCodeableConcept.coding.system'
+		dataType: string
+		lineageTag: a9d5da3d-28f6-4853-b940-e65838df6610
+		summarizeBy: none
+		sourceColumn: medicationCodeableConcept.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'medicationCodeableConcept.coding.code'
+		dataType: string
+		lineageTag: 9c7ec563-bea6-49b2-8322-29dd246bc520
+		summarizeBy: none
+		sourceColumn: medicationCodeableConcept.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'medicationCodeableConcept.coding.display'
+		dataType: string
+		lineageTag: 683ac5a9-46d5-4109-919a-79db38fa7d1e
+		summarizeBy: none
+		sourceColumn: medicationCodeableConcept.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedicationID
+		dataType: string
+		lineageTag: 9defbf7c-17ea-4c9c-9bab-dc7bbd93f6ad
+		summarizeBy: none
+		sourceColumn: MedicationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column authoredOn
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9c028fc5-df2b-4a63-a82a-7c68bc1ba945
+		summarizeBy: none
+		sourceColumn: authoredOn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'requester.display'
+		dataType: string
+		lineageTag: 63c635f0-4753-411f-b7af-220078c89424
+		summarizeBy: none
+		sourceColumn: requester.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReasonConditionID
+		dataType: string
+		lineageTag: b1fb1f78-a2eb-4b16-8e48-38b3acef3043
+		summarizeBy: none
+		sourceColumn: ReasonConditionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonReference.display'
+		dataType: string
+		lineageTag: 6a19e1f6-4f3b-4fbd-ab31-af1c0c77e7ab
+		summarizeBy: none
+		sourceColumn: reasonReference.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.system'
+		dataType: string
+		lineageTag: 8111f87d-06e2-4bb5-b9ec-e60362a9aeba
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.code'
+		dataType: string
+		lineageTag: 5abd7ba7-8e04-4eba-bf65-ff87234a710c
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.display'
+		dataType: string
+		lineageTag: 0861ad36-d387-4f98-9253-e42912b97d2d
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.sequence'
+		dataType: int64
+		formatString: 0
+		lineageTag: 17726e63-b3df-41d1-b4fe-4e7927b676a7
+		summarizeBy: sum
+		sourceColumn: dosageInstruction.sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.text'
+		dataType: string
+		lineageTag: 92465755-cbb0-4c09-b7d9-22c88a665646
+		summarizeBy: none
+		sourceColumn: dosageInstruction.text
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.asNeededBoolean'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b98cdcfc-8db8-48a3-aaec-afc25ea3b47f
+		summarizeBy: none
+		sourceColumn: dosageInstruction.asNeededBoolean
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.doseAndRate.doseQuantity.value'
+		dataType: double
+		lineageTag: 400cb9b8-f360-428b-a68b-d4f2945aaba4
+		summarizeBy: sum
+		sourceColumn: dosageInstruction.doseAndRate.doseQuantity.value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'dosageInstruction.timing.repeat.frequency'
+		dataType: int64
+		formatString: 0
+		lineageTag: 46820180-aa13-4e9d-9c7a-f0e33ca630c4
+		summarizeBy: sum
+		sourceColumn: dosageInstruction.timing.repeat.frequency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.timing.repeat.period'
+		dataType: double
+		lineageTag: f85cfb1d-4841-4eee-8848-afc25efd4d94
+		summarizeBy: sum
+		sourceColumn: dosageInstruction.timing.repeat.period
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'dosageInstruction.timing.repeat.periodUnit'
+		dataType: string
+		lineageTag: d6c6b00d-2bf1-49ba-b662-77d806eb60be
+		summarizeBy: none
+		sourceColumn: dosageInstruction.timing.repeat.periodUnit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.doseAndRate.type.coding.system'
+		dataType: string
+		lineageTag: 3dc888fc-7266-4f06-b05b-f3d032e46434
+		summarizeBy: none
+		sourceColumn: dosageInstruction.doseAndRate.type.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.doseAndRate.type.coding.code'
+		dataType: string
+		lineageTag: 416d530d-99bf-41b4-bef7-91f6bc800615
+		summarizeBy: none
+		sourceColumn: dosageInstruction.doseAndRate.type.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.doseAndRate.type.coding.display'
+		dataType: string
+		lineageTag: fbbbc966-dae5-42c9-833b-888e003814b3
+		summarizeBy: none
+		sourceColumn: dosageInstruction.doseAndRate.type.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.additionalInstruction.coding.system'
+		dataType: string
+		lineageTag: 45d75f2f-6819-4ca0-94cb-5d99984c0a34
+		summarizeBy: none
+		sourceColumn: dosageInstruction.additionalInstruction.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.additionalInstruction.coding.code'
+		dataType: string
+		lineageTag: 92b8270f-656f-495f-911a-7f9022c8cf59
+		summarizeBy: none
+		sourceColumn: dosageInstruction.additionalInstruction.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dosageInstruction.additionalInstruction.coding.display'
+		dataType: string
+		lineageTag: d18a550d-c258-4b7e-a9af-fbb69f158b3d
+		summarizeBy: none
+		sourceColumn: dosageInstruction.additionalInstruction.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.system'
+		dataType: string
+		lineageTag: d45bd0dd-821f-4c23-88ce-06bc252ac095
+		summarizeBy: none
+		sourceColumn: category.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.code'
+		dataType: string
+		lineageTag: b8694ccc-be3e-488b-99b9-9c45e1f79a8e
+		summarizeBy: none
+		sourceColumn: category.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.display'
+		dataType: string
+		lineageTag: af349535-743c-4efe-b1ef-9596449887ac
+		summarizeBy: none
+		sourceColumn: category.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'medicationReference.reference'
+		dataType: string
+		lineageTag: 30e8c86a-219d-4fb0-a7cc-7a492e9b704c
+		summarizeBy: none
+		sourceColumn: medicationReference.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'requester.reference'
+		dataType: string
+		lineageTag: eb3e37a9-dcab-45c0-ad66-556f6b3dcd83
+		summarizeBy: none
+		sourceColumn: requester.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonReference.reference'
+		dataType: string
+		lineageTag: da210317-d5c3-45ea-80f0-517290f7cb2a
+		summarizeBy: none
+		sourceColumn: reasonReference.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'subject.reference'
+		dataType: string
+		lineageTag: ae3026e5-7996-44ba-9fad-57cc5ad2c687
+		summarizeBy: none
+		sourceColumn: subject.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'encounter.reference'
+		dataType: string
+		lineageTag: 1e7ca3d4-2f6a-467d-bb71-22a856f638a4
+		summarizeBy: none
+		sourceColumn: encounter.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedicationRequest = m
+		mode: import
+		source =
+				let
+				    // Step 1: Connect with the FHIR connector and open the MedicationRequest resources.
+				    // The connector follows the paging links itself, so every request loads.
+				    Source = Fhir.Contents("http://localhost:8081/fhir", "MedicationRequest?"),
+				    MedicationRequestTable = Source{[Name = "MedicationRequest"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // Reads one type from a FHIR choice element (medication[x] here). The
+				    // FHIR connector puts all of the options in one column named after the
+				    // element, so this picks out the type we want. Matching ignores
+				    // capitalization, since primitive type names are lowercase in FHIR
+				    // (dateTime, boolean) and complex ones are capitalized (Quantity).
+				    ChoiceField = (choice as any, base as text, typeName as text) as any =>
+				        if choice = null or not (choice is record) then null
+				        else
+				            let
+				                wanted = {Text.Lower(base & typeName), Text.Lower(typeName)},
+				                matches = List.Select(Record.FieldNames(choice), each List.Contains(wanted, Text.Lower(_)))
+				            in
+				                if List.IsEmpty(matches) then null else Record.Field(choice, matches{0}),
+				
+				    // Reads a choice element that sits inside another element (for example
+				    // asNeeded[x] inside a dosage). Works whether it arrives nested
+				    // ("asNeeded" holding "Boolean") or flat ("asNeededBoolean").
+				    ChoiceFrom = (rec as any, base as text, typeName as text) as any =>
+				        let nested = GetField(rec, base)
+				        in if nested is record then ChoiceField(nested, base, typeName) else GetField(rec, base & typeName),
+				
+				    // Pulls the resource ID off the end of a reference like "Patient/123"
+				    ReferenceID = (reference as any) as nullable text =>
+				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				
+				    // Reads every dosage field Synthea fills in from one dosageInstruction,
+				    // and returns them as a record with FHIR-path names, ready to expand
+				    DosageDetails = (dosage as any) as record =>
+				        let
+				            repeat = GetField(GetField(dosage, "timing"), "repeat"),
+				            doseAndRate = FirstItem(GetField(dosage, "doseAndRate")),
+				            doseType = FirstCoding(GetField(doseAndRate, "type")),
+				            doseQuantity = ChoiceFrom(doseAndRate, "dose", "Quantity"),
+				            additional = FirstCoding(GetField(dosage, "additionalInstruction"))
+				        in
+				            [
+				                #"dosageInstruction.sequence" = GetField(dosage, "sequence"),
+				                #"dosageInstruction.text" = GetField(dosage, "text"),
+				                #"dosageInstruction.asNeededBoolean" = ChoiceFrom(dosage, "asNeeded", "Boolean"),
+				                #"dosageInstruction.timing.repeat.frequency" = GetField(repeat, "frequency"),
+				                #"dosageInstruction.timing.repeat.period" = GetField(repeat, "period"),
+				                #"dosageInstruction.timing.repeat.periodUnit" = GetField(repeat, "periodUnit"),
+				                #"dosageInstruction.doseAndRate.type.coding.system" = GetField(doseType, "system"),
+				                #"dosageInstruction.doseAndRate.type.coding.code" = GetField(doseType, "code"),
+				                #"dosageInstruction.doseAndRate.type.coding.display" = GetField(doseType, "display"),
+				                #"dosageInstruction.doseAndRate.doseQuantity.value" = GetField(doseQuantity, "value"),
+				                #"dosageInstruction.additionalInstruction.coding.system" = GetField(additional, "system"),
+				                #"dosageInstruction.additionalInstruction.coding.code" = GetField(additional, "code"),
+				                #"dosageInstruction.additionalInstruction.coding.display" = GetField(additional, "display")
+				            ],
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields Synthea fills in. medication[x] is a
+				    // choice element, which the FHIR connector returns as a single
+				    // "medication" column. Synthea uses either a code (CodeableConcept) or a
+				    // pointer to a Medication resource (Reference), so pull out both.
+				    SelectedRaw = Table.SelectColumns(
+				        MedicationRequestTable,
+				        {"id", "status", "intent", "category", "medication", "subject", "encounter", "authoredOn",
+				         "requester", "reasonCode", "reasonReference", "dosageInstruction"},
+				        MissingField.UseNull
+				    ),
+				    AddedMedicationConcept = Table.AddColumn(SelectedRaw, "medicationCodeableConcept", each ChoiceField([medication], "medication", "CodeableConcept")),
+				    AddedMedicationReference = Table.AddColumn(AddedMedicationConcept, "medicationReference", each ChoiceField([medication], "medication", "Reference")),
+				    SelectedFields = Table.RemoveColumns(AddedMedicationReference, {"medication"}),
+				
+				    // Step 3: Reduce each coded or repeating element to its first entry, so
+				    // the table stays at one row per request. The field profile shows none
+				    // of these repeat in Synthea data, so nothing is lost.
+				    PickedElements = Table.TransformColumns(SelectedFields, {
+				        {"category", FirstCoding},
+				        {"medicationCodeableConcept", FirstCoding},
+				        {"reasonCode", FirstCoding},
+				        {"reasonReference", FirstItem},
+				        {"dosageInstruction", FirstItem}
+				    }),
+				
+				    // Step 4: Expand the category (e.g. community, meaning taken at home)
+				    ExpandedCategory = Table.ExpandRecordColumn(PickedElements, "category", {"system", "code", "display"}, {"category.coding.system", "category.coding.code", "category.coding.display"}),
+				
+				    // Step 5: Expand the medication. For about two thirds of requests the
+				    // RxNorm code is right here; for the rest it's in a separate Medication
+				    // resource, whose ID is pulled out for a join or relationship.
+				    ExpandedMedicationCode = Table.ExpandRecordColumn(ExpandedCategory, "medicationCodeableConcept", {"system", "code", "display"}, {"medicationCodeableConcept.coding.system", "medicationCodeableConcept.coding.code", "medicationCodeableConcept.coding.display"}),
+				    ExpandedMedicationReference = Table.ExpandRecordColumn(ExpandedMedicationCode, "medicationReference", {"reference"}, {"medicationReference.reference"}),
+				    AddedMedicationID = Table.AddColumn(ExpandedMedicationReference, "MedicationID", each
+				        if [medicationReference.reference] <> null and Text.StartsWith([medicationReference.reference], "Medication/")
+				        then ReferenceID([medicationReference.reference]) else null,
+				        type nullable text
+				    ),
+				
+				    // Step 6: Expand the patient and encounter references and pull out their
+				    // IDs, which match the id columns in the Patient and Encounter queries
+				    ExpandedSubject = Table.ExpandRecordColumn(AddedMedicationID, "subject", {"reference"}, {"subject.reference"}),
+				    ExpandedEncounter = Table.ExpandRecordColumn(ExpandedSubject, "encounter", {"reference"}, {"encounter.reference"}),
+				    AddedPatientID = Table.AddColumn(ExpandedEncounter, "PatientID", each ReferenceID([subject.reference]), type nullable text),
+				    AddedEncounterID = Table.AddColumn(AddedPatientID, "EncounterID", each ReferenceID([encounter.reference]), type nullable text),
+				
+				    // Step 7: Expand who prescribed it
+				    ExpandedRequester = Table.ExpandRecordColumn(AddedEncounterID, "requester", {"reference", "display"}, {"requester.reference", "requester.display"}),
+				
+				    // Step 8: Expand why it was prescribed. Like Procedure, Synthea records
+				    // the reason either as a reference to a Condition (most requests) or as
+				    // a code with no Condition behind it.
+				    ExpandedReasonCode = Table.ExpandRecordColumn(ExpandedRequester, "reasonCode", {"system", "code", "display"}, {"reasonCode.coding.system", "reasonCode.coding.code", "reasonCode.coding.display"}),
+				    ExpandedReasonReference = Table.ExpandRecordColumn(ExpandedReasonCode, "reasonReference", {"reference", "display"}, {"reasonReference.reference", "reasonReference.display"}),
+				    AddedReasonConditionID = Table.AddColumn(ExpandedReasonReference, "ReasonConditionID", each
+				        if [reasonReference.reference] <> null and Text.StartsWith([reasonReference.reference], "Condition/")
+				        then ReferenceID([reasonReference.reference]) else null,
+				        type nullable text
+				    ),
+				
+				    // Step 9: Pull the dosage details out of the first dosage instruction
+				    // and expand them into columns
+				    AddedDosage = Table.AddColumn(AddedReasonConditionID, "Dosage", each DosageDetails([dosageInstruction])),
+				    RemovedDosageInstruction = Table.RemoveColumns(AddedDosage, {"dosageInstruction"}),
+				    ExpandedDosage = Table.ExpandRecordColumn(RemovedDosageInstruction, "Dosage", Record.FieldNames(DosageDetails(null))),
+				
+				    // Step 10: Parse the date the prescription was written
+				    ParsedDates = Table.TransformColumns(ExpandedDosage, {
+				        {"authoredOn", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
+				    }),
+				
+				    // Step 11: Set column types and put the columns in a readable order
+				    ChangedTypes = Table.TransformColumnTypes(ParsedDates, {
+				        {"id", type text}, {"status", type text}, {"intent", type text},
+				        {"category.coding.system", type text}, {"category.coding.code", type text}, {"category.coding.display", type text},
+				        {"medicationCodeableConcept.coding.system", type text}, {"medicationCodeableConcept.coding.code", type text},
+				        {"medicationCodeableConcept.coding.display", type text}, {"medicationReference.reference", type text},
+				        {"subject.reference", type text}, {"encounter.reference", type text},
+				        {"requester.reference", type text}, {"requester.display", type text},
+				        {"reasonCode.coding.system", type text}, {"reasonCode.coding.code", type text}, {"reasonCode.coding.display", type text},
+				        {"reasonReference.reference", type text}, {"reasonReference.display", type text},
+				        {"dosageInstruction.sequence", Int64.Type}, {"dosageInstruction.text", type text},
+				        {"dosageInstruction.asNeededBoolean", type logical},
+				        {"dosageInstruction.timing.repeat.frequency", Int64.Type},
+				        {"dosageInstruction.timing.repeat.period", type number},
+				        {"dosageInstruction.timing.repeat.periodUnit", type text},
+				        {"dosageInstruction.doseAndRate.type.coding.system", type text},
+				        {"dosageInstruction.doseAndRate.type.coding.code", type text},
+				        {"dosageInstruction.doseAndRate.type.coding.display", type text},
+				        {"dosageInstruction.doseAndRate.doseQuantity.value", type number},
+				        {"dosageInstruction.additionalInstruction.coding.system", type text},
+				        {"dosageInstruction.additionalInstruction.coding.code", type text},
+				        {"dosageInstruction.additionalInstruction.coding.display", type text}
+				    }),
+				    ReorderedColumns = Table.ReorderColumns(ChangedTypes, {
+				        "id", "PatientID", "EncounterID", "status", "intent",
+				        "medicationCodeableConcept.coding.system", "medicationCodeableConcept.coding.code", "medicationCodeableConcept.coding.display",
+				        "MedicationID", "authoredOn", "requester.display",
+				        "ReasonConditionID", "reasonReference.display",
+				        "reasonCode.coding.system", "reasonCode.coding.code", "reasonCode.coding.display",
+				        "dosageInstruction.sequence", "dosageInstruction.text", "dosageInstruction.asNeededBoolean",
+				        "dosageInstruction.doseAndRate.doseQuantity.value",
+				        "dosageInstruction.timing.repeat.frequency", "dosageInstruction.timing.repeat.period", "dosageInstruction.timing.repeat.periodUnit",
+				        "dosageInstruction.doseAndRate.type.coding.system", "dosageInstruction.doseAndRate.type.coding.code", "dosageInstruction.doseAndRate.type.coding.display",
+				        "dosageInstruction.additionalInstruction.coding.system", "dosageInstruction.additionalInstruction.coding.code", "dosageInstruction.additionalInstruction.coding.display",
+				        "category.coding.system", "category.coding.code", "category.coding.display",
+				        "medicationReference.reference", "requester.reference", "reasonReference.reference",
+				        "subject.reference", "encounter.reference"
+				    })
+				in
+				    ReorderedColumns
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

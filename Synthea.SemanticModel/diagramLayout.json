@@ -10,80 +10,86 @@
       "nodes": [
         {
           "location": {
-            "x": 702,
-            "y": 22.26318359375
+            "x": 782,
+            "y": 696
           },
           "nodeIndex": "Encounter",
+          "nodeLineageTag": "11da1b49-bd5e-424d-89f9-d91a720be2e5",
           "size": {
             "height": 455,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 488,
-            "y": 576
+            "x": 433,
+            "y": 701
           },
           "nodeIndex": "Patient",
+          "nodeLineageTag": "979a8569-3f45-4af9-b98e-c8d7f9a890b7",
           "size": {
-            "height": 300,
+            "height": 354,
             "width": 236
           },
-          "zIndex": 0
+          "zIndex": 10
         },
         {
           "location": {
-            "x": 81,
-            "y": 0
+            "x": 847,
+            "y": 2
           },
           "nodeIndex": "Condition",
+          "nodeLineageTag": "74a104c7-4247-4189-96b9-f6e9f41e01ea",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 900,
-            "y": 576
+            "x": 1425,
+            "y": 391
           },
           "nodeIndex": "Observation",
+          "nodeLineageTag": "6768dfea-9aaa-44db-93b9-bca81799c442",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 1242,
-            "y": 577.8427734375
+            "x": 1419,
+            "y": 0
           },
           "nodeIndex": "ObservationComponent",
+          "nodeLineageTag": "400e6a40-4067-41ec-9c5f-1739a0d533ca",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 368,
+            "x": 295,
             "y": 0
           },
           "nodeIndex": "Immunization",
+          "nodeLineageTag": "7aed7d60-233d-4e1a-b083-100fa53c44a8",
           "size": {
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 1068,
-            "y": 63.92138671875
+            "x": 0,
+            "y": 319
           },
           "nodeIndex": "DiagnosticReport",
           "nodeLineageTag": "1d448531-2329-4d6d-a9f1-7c54d02b2c0f",
@@ -91,12 +97,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 6
         },
         {
           "location": {
-            "x": 1445,
-            "y": 350.92138671875
+            "x": 0,
+            "y": 16
           },
           "nodeIndex": "DiagnosticReportResult",
           "nodeLineageTag": "68670488-0d97-4c29-a7c8-cb1567ddc4d8",
@@ -104,12 +110,12 @@
             "height": 176,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 7
         },
         {
           "location": {
-            "x": 1729,
-            "y": 288.92138671875
+            "x": 1101,
+            "y": 5
           },
           "nodeIndex": "Procedure",
           "nodeLineageTag": "3501faed-4c52-4b15-bc40-22cb7a853b6e",
@@ -117,7 +123,20 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 572.33332824707031,
+            "y": 0
+          },
+          "nodeIndex": "MedicationRequest",
+          "nodeLineageTag": "7d6275ed-531b-4dbe-a765-00f61536c082",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
         }
       ],
       "name": "All tables",

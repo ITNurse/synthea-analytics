@@ -1,6 +1,9 @@
 table Condition
 	lineageTag: 74a104c7-4247-4189-96b9-f6e9f41e01ea
 
+	measure 'Patient Condition Count'
+		lineageTag: e26310ea-748f-42e8-a189-bcc040e489e7
+
 	column id
 		dataType: string
 		lineageTag: a7d570ff-2729-41dd-9f2f-f0919cb9647a

@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["Encounter","Patient","Condition","Observation","ObservationComponent","Immunization","DiagnosticReport","DiagnosticReportResult","Procedure"]
+annotation PBI_QueryOrder = ["Encounter","Patient","Condition","Observation","ObservationComponent","Immunization","DiagnosticReport","DiagnosticReportResult","Procedure","MedicationRequest"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -22,6 +22,7 @@ ref table Immunization
 ref table DiagnosticReport
 ref table DiagnosticReportResult
 ref table Procedure
+ref table MedicationRequest
 
 ref cultureInfo en-US
 

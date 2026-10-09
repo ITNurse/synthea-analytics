@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "b59626298301cb9fc56c",
+  "name": "0fe870fe21fa42ea2c79",
   "position": {
-    "x": 0,
+    "x": 299.746835443038,
     "y": 0,
-    "z": 1,
+    "z": 2000,
     "height": 65.822784810126578,
     "width": 299.746835443038,
-    "tabOrder": 1
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,15 +20,16 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient"
+                      "Entity": "Encounter"
                     }
                   },
-                  "Property": "Patient_Name"
+                  "Property": "id"
                 }
               },
-              "queryRef": "Patient.Patient_Name",
-              "nativeQueryRef": "Patient_Name",
-              "active": true
+              "queryRef": "Encounter.id",
+              "nativeQueryRef": "Encounter",
+              "active": true,
+              "displayName": "Encounter"
             }
           ]
         }
@@ -63,7 +64,7 @@
       ]
     },
     "syncGroup": {
-      "groupName": "Patient_Name",
+      "groupName": "id",
       "fieldChanges": true,
       "filterChanges": true
     },
