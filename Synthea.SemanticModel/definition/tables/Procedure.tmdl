@@ -1,0 +1,239 @@
+table Procedure
+	lineageTag: 3501faed-4c52-4b15-bc40-22cb7a853b6e
+
+	column id
+		dataType: string
+		lineageTag: b7850631-76b4-4191-a29f-81a837b61c22
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: string
+		lineageTag: 5c6411a1-9a32-4a37-a974-b9b4976e13cd
+		summarizeBy: none
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EncounterID
+		dataType: string
+		lineageTag: 6ce6be09-d0cf-47b6-b01e-ad0cabb6cc53
+		summarizeBy: none
+		sourceColumn: EncounterID
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 27f289f9-6c83-4ca4-95d7-5575d807b042
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.system'
+		dataType: string
+		lineageTag: e935f498-9ec2-447a-8222-4fff46781d18
+		summarizeBy: none
+		sourceColumn: code.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.code'
+		dataType: string
+		lineageTag: d493a181-e005-4420-8b07-42789d7fa3d6
+		summarizeBy: none
+		sourceColumn: code.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.display'
+		dataType: string
+		lineageTag: 0c77d5e8-2f5e-4fce-9631-9d41c43f9697
+		summarizeBy: none
+		sourceColumn: code.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'performedPeriod.start'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5a6ec64d-3613-44da-97ae-575feacc1c66
+		summarizeBy: none
+		sourceColumn: performedPeriod.start
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'performedPeriod.end'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0a738e6e-5f8a-4d68-88ef-74aa36bc0490
+		summarizeBy: none
+		sourceColumn: performedPeriod.end
+
+		annotation SummarizationSetBy = Automatic
+
+	column DurationMinutes
+		dataType: double
+		lineageTag: fa7e2a77-f145-42b1-9de3-1df5cd79e48b
+		summarizeBy: sum
+		sourceColumn: DurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'location.display'
+		dataType: string
+		lineageTag: 76e41b34-0ea7-44af-b544-625ad8e9fbfa
+		summarizeBy: none
+		sourceColumn: location.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'location.reference'
+		dataType: string
+		lineageTag: 4a078b01-3ac3-4616-8a41-7ce3b0d79e37
+		summarizeBy: none
+		sourceColumn: location.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'subject.reference'
+		dataType: string
+		lineageTag: a8502e3d-cd4d-456b-8d97-8f1531a8953d
+		summarizeBy: none
+		sourceColumn: subject.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'encounter.reference'
+		dataType: string
+		lineageTag: 9df00ae4-7a34-4dcf-946b-8e820021b4a6
+		summarizeBy: none
+		sourceColumn: encounter.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Procedure = m
+		mode: import
+		source =
+				let
+				    // Step 1: Connect with the FHIR connector and open the Procedure resources.
+				    // The connector follows the paging links itself, so every procedure loads.
+				    Source = Fhir.Contents("http://localhost:8081/fhir", "Procedure?"),
+				    ProcedureTable = Source{[Name = "Procedure"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // Reads one type from a FHIR choice element (performed[x] here). The
+				    // FHIR connector puts all of the options in one column named after the
+				    // element, so this picks out the type we want. Matching ignores
+				    // capitalization, since primitive type names are lowercase in FHIR
+				    // (dateTime, string) and complex ones are capitalized (Period).
+				    ChoiceField = (choice as any, base as text, typeName as text) as any =>
+				        if choice = null or not (choice is record) then null
+				        else
+				            let
+				                wanted = {Text.Lower(base & typeName), Text.Lower(typeName)},
+				                matches = List.Select(Record.FieldNames(choice), each List.Contains(wanted, Text.Lower(_)))
+				            in
+				                if List.IsEmpty(matches) then null else Record.Field(choice, matches{0}),
+				
+				    // Pulls the resource ID off the end of a reference like "Patient/123"
+				    ReferenceID = (reference as any) as nullable text =>
+				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields Synthea fills in. performed[x] is a choice
+				    // element, which the FHIR connector returns as a single "performed"
+				    // column, so pull the Period out of it.
+				    SelectedRaw = Table.SelectColumns(
+				        ProcedureTable,
+				        {"id", "status", "code", "subject", "encounter", "performed", "location"},
+				        MissingField.UseNull
+				    ),
+				    AddedPerformedPeriod = Table.AddColumn(SelectedRaw, "performedPeriod", each ChoiceField([performed], "performed", "Period")),
+				    SelectedFields = Table.RemoveColumns(AddedPerformedPeriod, {"performed"}),
+				
+				    // Step 3: Reduce the procedure code to its first Coding, so the table
+				    // stays at one row per procedure
+				    PickedCodings = Table.TransformColumns(SelectedFields, {{"code", FirstCoding}}),
+				
+				    // Step 4: Expand the procedure code (SNOMED CT in Synthea)
+				    ExpandedCode = Table.ExpandRecordColumn(PickedCodings, "code", {"system", "code", "display"}, {"code.coding.system", "code.coding.code", "code.coding.display"}),
+				
+				    // Step 5: Expand the patient and encounter references and pull out their
+				    // IDs, which match the id columns in the Patient and Encounter queries
+				    ExpandedSubject = Table.ExpandRecordColumn(ExpandedCode, "subject", {"reference"}, {"subject.reference"}),
+				    ExpandedEncounter = Table.ExpandRecordColumn(ExpandedSubject, "encounter", {"reference"}, {"encounter.reference"}),
+				    AddedPatientID = Table.AddColumn(ExpandedEncounter, "PatientID", each ReferenceID([subject.reference]), type nullable text),
+				    AddedEncounterID = Table.AddColumn(AddedPatientID, "EncounterID", each ReferenceID([encounter.reference]), type nullable text),
+				
+				    // Step 6: Expand where the procedure was done. The reference is kept for
+				    // joining to a Location table later.
+				    ExpandedLocation = Table.ExpandRecordColumn(AddedEncounterID, "location", {"reference", "display"}, {"location.reference", "location.display"}),
+				
+				    // Step 7: Expand when the procedure started and ended, and work out its length
+				    ExpandedPeriod = Table.ExpandRecordColumn(ExpandedLocation, "performedPeriod", {"start", "end"}, {"performedPeriod.start", "performedPeriod.end"}),
+				    ParsedDates = Table.TransformColumns(ExpandedPeriod, {
+				        {"performedPeriod.start", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone},
+				        {"performedPeriod.end", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
+				    }),
+				    AddedDurationMinutes = Table.AddColumn(ParsedDates, "DurationMinutes", each
+				        if [performedPeriod.start] = null or [performedPeriod.end] = null then null
+				        else Duration.TotalMinutes([performedPeriod.end] - [performedPeriod.start]),
+				        type nullable number
+				    ),
+				
+				    // Step 8: Set column types and put the columns in a readable order
+				    ChangedTypes = Table.TransformColumnTypes(AddedDurationMinutes, {
+				        {"id", type text}, {"status", type text},
+				        {"code.coding.system", type text}, {"code.coding.code", type text}, {"code.coding.display", type text},
+				        {"subject.reference", type text}, {"encounter.reference", type text},
+				        {"location.reference", type text}, {"location.display", type text}
+				    }),
+				    ReorderedColumns = Table.ReorderColumns(ChangedTypes, {
+				        "id", "PatientID", "EncounterID", "status",
+				        "code.coding.system", "code.coding.code", "code.coding.display",
+				        "performedPeriod.start", "performedPeriod.end", "DurationMinutes",
+				        "location.display", "location.reference",
+				        "subject.reference", "encounter.reference"
+				    })
+				in
+				    ReorderedColumns
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

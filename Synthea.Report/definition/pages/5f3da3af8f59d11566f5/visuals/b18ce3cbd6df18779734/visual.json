@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "b18ce3cbd6df18779734",
   "position": {
-    "x": 10,
-    "y": 355,
+    "x": 0,
+    "y": 355.44303797468353,
     "z": 1,
-    "height": 345,
-    "width": 1270,
+    "height": 364.55696202531647,
+    "width": 1269.873417721519,
     "tabOrder": 1
   },
   "visual": {
@@ -56,5 +56,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "41997be396d262e574d5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "PresentedFormText"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

@@ -27,3 +27,12 @@ relationship AutoDetected_3437bd54-1c70-43da-9203-a2d0606ec05b
 	fromColumn: DiagnosticReport.PatientID
 	toColumn: Patient.id
 
+relationship AutoDetected_2f8afbf3-dd0f-4aae-b8ef-2e30cbc35e90
+	fromColumn: Procedure.EncounterID
+	toColumn: Encounter.id
+
+relationship AutoDetected_7eaa6469-c523-4efe-a6ab-ffdf7cc9ba33
+	isActive: false
+	fromColumn: Procedure.PatientID
+	toColumn: Patient.id
+

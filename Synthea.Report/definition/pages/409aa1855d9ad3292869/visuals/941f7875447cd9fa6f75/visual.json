@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "941f7875447cd9fa6f75",
   "position": {
-    "x": 9.78660494288061,
-    "y": 0,
+    "x": 0,
+    "y": 80,
     "z": 0,
-    "height": 719.92712611065485,
-    "width": 1270.4236541476891,
+    "height": 640,
+    "width": 1280,
     "tabOrder": 0
   },
   "visual": {
@@ -223,6 +223,76 @@
               }
             },
             "Property": "birthDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5ffdc4ecda0f94b6677d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "Age"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5a920e98df217db3b3a4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "maritalStatus.coding.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f15018371b3e7075b716",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "gender"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "24ef45fe9c71b80b217d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "communication.language.coding.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c175d460cff9a2c75cc6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "address.state"
           }
         },
         "type": "Categorical"

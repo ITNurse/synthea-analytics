@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "7e874b1ba22976b9b450",
   "position": {
-    "x": 9.5246584633271976,
-    "y": 0,
+    "x": 0,
+    "y": 80,
     "z": 0,
-    "height": 313.52000775118688,
-    "width": 1270.7481833155703,
+    "height": 280.50632911392404,
+    "width": 1280,
     "tabOrder": 0
   },
   "visual": {
@@ -208,5 +208,135 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "43bfb6555a107782999d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8de6c9ba5f0e1b2bb691",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c99997ec824706c8a775",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "adc847b1768b87a43a8c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "code.coding.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4c70b3554e053208754d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "code.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cb4e311a4650b993100e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "valueCodeableConcept.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "899eacbf6a691bc61812",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "valueQuantity.unit"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6cebcea5602c9d80e218",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "valueQuantity.value"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a29d9e297d6062b715cd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation"
+              }
+            },
+            "Property": "effectiveDateTime"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

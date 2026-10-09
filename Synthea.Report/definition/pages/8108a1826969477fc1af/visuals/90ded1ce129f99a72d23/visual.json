@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "90ded1ce129f99a72d23",
   "position": {
-    "x": 9.672598465041748,
-    "y": 0,
+    "x": 0,
+    "y": 80,
     "z": 0,
-    "height": 719.91768575525009,
-    "width": 1270.5648983722695,
+    "height": 640,
+    "width": 1280,
     "tabOrder": 0
   },
   "visual": {
@@ -200,35 +200,8 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "0b31214661f3abc38a21",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Patient"
-              }
-            },
-            "Property": "name.family"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "cbe03b34dd15ebabe7df",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Patient"
-              }
-            },
-            "Property": "name.given"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
         "name": "3d0139d10c70acc54fa1",
+        "ordinal": 0,
         "field": {
           "Column": {
             "Expression": {
@@ -243,6 +216,7 @@
       },
       {
         "name": "29886486887570d50f6f",
+        "ordinal": 1,
         "field": {
           "Column": {
             "Expression": {
@@ -257,6 +231,7 @@
       },
       {
         "name": "495cfe586920115578bc",
+        "ordinal": 2,
         "field": {
           "Column": {
             "Expression": {
@@ -270,21 +245,38 @@
         "type": "Categorical"
       },
       {
-        "name": "9387f8962367e539b213",
+        "name": "0b31214661f3abc38a21",
+        "ordinal": 3,
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Encounter"
+                "Entity": "Patient"
               }
             },
-            "Property": "period.start"
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cbe03b34dd15ebabe7df",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.given"
           }
         },
         "type": "Categorical"
       },
       {
         "name": "9b093abe6555a343ff97",
+        "ordinal": 5,
         "field": {
           "Column": {
             "Expression": {
@@ -298,7 +290,23 @@
         "type": "Categorical"
       },
       {
+        "name": "9387f8962367e539b213",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter"
+              }
+            },
+            "Property": "period.start"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
         "name": "dc8fad08b45e8d6c68ea",
+        "ordinal": 7,
         "field": {
           "Column": {
             "Expression": {
@@ -312,7 +320,23 @@
         "type": "Categorical"
       },
       {
+        "name": "2b8592356058632de1c8",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter"
+              }
+            },
+            "Property": "serviceProvider.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
         "name": "812eb2ad8bd1a9770b65",
+        "ordinal": 9,
         "field": {
           "Column": {
             "Expression": {
@@ -327,6 +351,7 @@
       },
       {
         "name": "f1c9f37bd0e2e5540d41",
+        "ordinal": 10,
         "field": {
           "Column": {
             "Expression": {
@@ -338,21 +363,8 @@
           }
         },
         "type": "Categorical"
-      },
-      {
-        "name": "2b8592356058632de1c8",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Encounter"
-              }
-            },
-            "Property": "serviceProvider.display"
-          }
-        },
-        "type": "Categorical"
       }
-    ]
+    ],
+    "filterSortOrder": "Custom"
   }
 }

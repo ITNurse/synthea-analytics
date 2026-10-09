@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "2a7cbb68af7a7e3a753d",
   "position": {
-    "x": 9.5246584633271976,
-    "y": 331.77560313923067,
+    "x": 0,
+    "y": 388.86075949367086,
     "z": 1000,
-    "height": 388.12983238058325,
-    "width": 1270.7481833155703,
+    "height": 331.13924050632909,
+    "width": 1280,
     "tabOrder": 1000
   },
   "visual": {
@@ -236,5 +236,145 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fcf82228e1ea5367dbd7",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ObservationComponent"
+              }
+            },
+            "Property": "component.code.coding.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d66c694d8266e2d1763c",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ObservationComponent"
+              }
+            },
+            "Property": "component.code.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "eae8c22539b7ebfdcec5",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ObservationComponent"
+              }
+            },
+            "Property": "component.valueCodeableConcept.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3050b924ad7e97164e06",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ObservationComponent"
+              }
+            },
+            "Property": "component.valueQuantity.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "efa4e591c76d03130703",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ObservationComponent"
+              }
+            },
+            "Property": "component.valueQuantity.value"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "325ef0cf572e9549a370",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ObservationComponent"
+              }
+            },
+            "Property": "component.valueString"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e2c9673da13e1664ba3f",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "686f1b4cca67c064cf8b",
+        "ordinal": 7,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5ab6ac25fa9d756eae62",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ObservationComponent"
+              }
+            },
+            "Property": "ObservationID"
+          }
+        },
+        "type": "Categorical"
+      }
+    ],
+    "filterSortOrder": "Custom"
   }
 }

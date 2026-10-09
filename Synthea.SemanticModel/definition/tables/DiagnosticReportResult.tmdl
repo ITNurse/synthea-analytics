@@ -1,0 +1,86 @@
+table DiagnosticReportResult
+	lineageTag: 68670488-0d97-4c29-a7c8-cb1567ddc4d8
+
+	column DiagnosticReportID
+		dataType: string
+		lineageTag: 47994935-fece-493f-8b13-aefef8f5d0f5
+		summarizeBy: none
+		sourceColumn: DiagnosticReportID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'result.reference'
+		dataType: string
+		lineageTag: 7a0f3248-076b-4921-93e1-429239fb2acc
+		summarizeBy: none
+		sourceColumn: result.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'result.display'
+		dataType: string
+		lineageTag: d61eb354-b4c4-4ff3-a6e0-88fba76d2117
+		summarizeBy: none
+		sourceColumn: result.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column ObservationID
+		dataType: string
+		lineageTag: 2f174b45-6cbd-4690-ae54-63b14b9f2130
+		summarizeBy: none
+		sourceColumn: ObservationID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DiagnosticReportResult = m
+		mode: import
+		source =
+				let
+				    // Step 1: Connect with the FHIR connector and open the DiagnosticReport resources
+				    Source = Fhir.Contents("http://localhost:8081/fhir", "DiagnosticReport?"),
+				    DiagnosticReportTable = Source{[Name = "DiagnosticReport"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers (same as the DiagnosticReport query)
+				    // ---------------------------------------------------------------
+				
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    ReferenceID = (reference as any) as nullable text =>
+				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep just the report id and its results, and keep only the
+				    // reports that have results (the lab panels, about half in Synthea)
+				    SelectedFields = Table.SelectColumns(DiagnosticReportTable, {"id", "result"}, MissingField.UseNull),
+				    ResultsAsList = Table.TransformColumns(SelectedFields, {{"result", AsList}}),
+				    KeptWithResults = Table.SelectRows(ResultsAsList, each [result] <> null and not List.IsEmpty([result])),
+				
+				    // Step 3: One row per result. The report's id becomes DiagnosticReportID,
+				    // the key back to the DiagnosticReport query.
+				    RenamedID = Table.RenameColumns(KeptWithResults, {{"id", "DiagnosticReportID"}}),
+				    ExpandedResultList = Table.ExpandListColumn(RenamedID, "result"),
+				    ExpandedResultFields = Table.ExpandRecordColumn(ExpandedResultList, "result", {"reference", "display"}, {"result.reference", "result.display"}),
+				
+				    // Step 4: Pull out the Observation ID, the key to the Observation query
+				    AddedObservationID = Table.AddColumn(ExpandedResultFields, "ObservationID", each ReferenceID([result.reference]), type nullable text),
+				
+				    // Step 5: Set column types
+				    ChangedTypes = Table.TransformColumnTypes(AddedObservationID, {
+				        {"DiagnosticReportID", type text}, {"result.reference", type text}, {"result.display", type text}
+				    })
+				in
+				    ChangedTypes
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

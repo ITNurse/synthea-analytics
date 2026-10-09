@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "27873969b68194b2b6c6",
+  "name": "7ef3961744d1c8781ccb",
   "position": {
     "x": 0,
     "y": 80,
     "z": 0,
     "height": 640,
-    "width": 1280,
+    "width": 1269.873417721519,
     "tabOrder": 0
   },
   "visual": {
@@ -26,7 +26,7 @@
                   "Property": "name.family"
                 }
               },
-              "queryRef": "Patient_FHIR.name.family",
+              "queryRef": "Patient.name.family",
               "nativeQueryRef": "name.family"
             },
             {
@@ -40,7 +40,7 @@
                   "Property": "name.given"
                 }
               },
-              "queryRef": "Patient_FHIR.name.given",
+              "queryRef": "Patient.name.given",
               "nativeQueryRef": "name.given"
             },
             {
@@ -48,41 +48,27 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Condition"
+                      "Entity": "Procedure"
                     }
                   },
-                  "Property": "category.coding.code"
+                  "Property": "code.coding.code"
                 }
               },
-              "queryRef": "Condition_FHIR.category.coding.code",
-              "nativeQueryRef": "category.coding.code"
+              "queryRef": "Procedure.code.coding.code",
+              "nativeQueryRef": "code.coding.code"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Condition"
-                    }
-                  },
-                  "Property": "clinicalStatus.coding.code"
-                }
-              },
-              "queryRef": "Condition_FHIR.clinicalStatus.coding.code",
-              "nativeQueryRef": "clinicalStatus.coding.code"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Condition"
+                      "Entity": "Procedure"
                     }
                   },
                   "Property": "code.coding.display"
                 }
               },
-              "queryRef": "Condition_FHIR.code.coding.display",
+              "queryRef": "Procedure.code.coding.display",
               "nativeQueryRef": "code.coding.display"
             },
             {
@@ -90,14 +76,56 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Condition"
+                      "Entity": "Procedure"
                     }
                   },
-                  "Property": "verificationStatus.coding.code"
+                  "Property": "DurationMinutes"
                 }
               },
-              "queryRef": "Condition_FHIR.verificationStatus.coding.code",
-              "nativeQueryRef": "verificationStatus.coding.code"
+              "queryRef": "Sum(Procedure.DurationMinutes)",
+              "nativeQueryRef": "DurationMinutes"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Procedure"
+                    }
+                  },
+                  "Property": "performedPeriod.end"
+                }
+              },
+              "queryRef": "Procedure.performedPeriod.end",
+              "nativeQueryRef": "performedPeriod.end"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Procedure"
+                    }
+                  },
+                  "Property": "performedPeriod.start"
+                }
+              },
+              "queryRef": "Procedure.performedPeriod.start",
+              "nativeQueryRef": "performedPeriod.start"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Procedure"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "Procedure.status",
+              "nativeQueryRef": "status"
             }
           ]
         }
@@ -117,7 +145,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Condition'"
+                  "Value": "'Procedure'"
                 }
               }
             }
@@ -130,43 +158,28 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "f60433e8206f1e649f87",
+        "name": "6ea6ca5bd6183d6e96ce",
         "ordinal": 0,
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Condition"
+                "Entity": "Procedure"
               }
             },
-            "Property": "category.coding.code"
+            "Property": "code.coding.code"
           }
         },
         "type": "Categorical"
       },
       {
-        "name": "8957cbd3ae7dc91b857e",
+        "name": "4e232e76c27bbcad1b93",
         "ordinal": 1,
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Condition"
-              }
-            },
-            "Property": "clinicalStatus.coding.code"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e8f2dd5c52ffe4e5f6ff",
-        "ordinal": 2,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Condition"
+                "Entity": "Procedure"
               }
             },
             "Property": "code.coding.display"
@@ -175,7 +188,22 @@
         "type": "Categorical"
       },
       {
-        "name": "2cbaa1bdf44c8232ebe5",
+        "name": "78a4f9da93e0455d22bb",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "DurationMinutes"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e7b6f0a510b7e9720e18",
         "ordinal": 3,
         "field": {
           "Column": {
@@ -190,7 +218,7 @@
         "type": "Categorical"
       },
       {
-        "name": "fbc6e333d323d92de150",
+        "name": "604b310cab0a1527c9ca",
         "ordinal": 4,
         "field": {
           "Column": {
@@ -205,16 +233,46 @@
         "type": "Categorical"
       },
       {
-        "name": "b506ddb7985be07bb2b6",
+        "name": "6a171c76227a4358d575",
         "ordinal": 5,
         "field": {
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Condition"
+                "Entity": "Procedure"
               }
             },
-            "Property": "verificationStatus.coding.code"
+            "Property": "performedPeriod.end"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b1a50826c3b81fbd84ab",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "performedPeriod.start"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0ca4426c55567aaba365",
+        "ordinal": 7,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "status"
           }
         },
         "type": "Categorical"

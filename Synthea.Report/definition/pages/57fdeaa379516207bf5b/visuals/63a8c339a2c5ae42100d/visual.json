@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "63a8c339a2c5ae42100d",
   "position": {
-    "x": 9.8773859652377158,
-    "y": 0,
+    "x": 0,
+    "y": 80,
     "z": 0,
-    "height": 720.28937654195033,
-    "width": 1270.3837949136509,
+    "height": 640,
+    "width": 1280,
     "tabOrder": 0
   },
   "visual": {
@@ -129,6 +129,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Immunization"
+                  }
+                },
+                "Property": "vaccineCode.coding.display"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "drillFilterOtherVisuals": true

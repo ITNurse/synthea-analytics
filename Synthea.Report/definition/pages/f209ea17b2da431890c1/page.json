@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
-  "name": "5f3da3af8f59d11566f5",
-  "displayName": "DiagnosticReport",
+  "name": "f209ea17b2da431890c1",
+  "displayName": "Procedure",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,

@@ -243,6 +243,12 @@ table Patient
 
 		annotation SummarizationSetBy = Automatic
 
+	column Patient_Name = Patient[name.family] & ", " & Patient[name.given]
+		lineageTag: 9ff25dfb-0ba7-4290-bb0c-847a9424b252
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Patient = m
 		mode: import
 		source = ```

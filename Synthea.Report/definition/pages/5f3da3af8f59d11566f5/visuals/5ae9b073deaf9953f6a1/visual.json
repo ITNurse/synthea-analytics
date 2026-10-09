@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
   "name": "5ae9b073deaf9953f6a1",
   "position": {
-    "x": 9.8324022346368718,
-    "y": 0,
+    "x": 0,
+    "y": 80,
     "z": 0,
-    "height": 345.02793296089391,
-    "width": 1270.1675977653633,
+    "height": 247.08860759493669,
+    "width": 1269.873417721519,
     "tabOrder": 0
   },
   "visual": {
@@ -126,6 +126,20 @@
               },
               "queryRef": "DiagnosticReport.status",
               "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DiagnosticReport"
+                    }
+                  },
+                  "Property": "id"
+                }
+              },
+              "queryRef": "DiagnosticReport.id",
+              "nativeQueryRef": "id"
             }
           ]
         }
@@ -177,5 +191,174 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "442e87a167ffe939fedc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "18e8bcf12a12a02f980a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c88b945835f20af14079",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "code.coding.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cac9d04c16cb7d695cc8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "code.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c930a2a8b60388d65106",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "effectiveDateTime"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f9cd7b08c4adeadae822",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "ResultCount"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "299e59fde7b4a55452b2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6db21471f22e1b050928",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "performer.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2ecd24062573b6276ba0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DiagnosticReport"
+              }
+            },
+            "Property": "id"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "DiagnosticReport",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "id"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'412e4f1f-4e88-2bbc-a94b-31bbf988293d'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
   }
 }
