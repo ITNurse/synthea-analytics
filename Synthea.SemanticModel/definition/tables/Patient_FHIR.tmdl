@@ -336,6 +336,20 @@ table Patient_FHIR
 				            List.Transform(items, each if _ is record then Text.From(Record.FieldValues(_){0}) else Text.From(_)),
 				            separator
 				        ),
+				    
+				    // Reads one type from a FHIR choice element (value[x], deceased[x] and
+				    // so on). The FHIR connector puts all of the options in one column named
+				    // after the element, so this picks out the type we want. Matching ignores
+				    // capitalization, since primitive type names are lowercase in FHIR
+				    // (dateTime, boolean, string) and complex ones are capitalized (Quantity).
+				    ChoiceField = (choice as any, base as text, typeName as text) as any =>
+				        if choice = null or not (choice is record) then null
+				        else
+				            let
+				                wanted = {Text.Lower(base & typeName), Text.Lower(typeName)},
+				                matches = List.Select(Record.FieldNames(choice), each List.Contains(wanted, Text.Lower(_)))
+				            in
+				                if List.IsEmpty(matches) then null else Record.Field(choice, matches{0}),
 				
 				    // ---------------------------------------------------------------
 				    // Transformation steps
@@ -343,13 +357,17 @@ table Patient_FHIR
 				
 				    // Step 2: Keep only the fields the report uses. MissingField.UseNull adds
 				    // an empty column if a field isn't present at all (Synthea patients have
-				    // no photo, for example), so later steps don't break.
-				    SelectedFields = Table.SelectColumns(
+				    // no photo, for example), so later steps don't break. deceased[x] is a
+				    // choice element, which the FHIR connector returns as a single
+				    // "deceased" column, so pull the dateTime out of it.
+				    SelectedRaw = Table.SelectColumns(
 				        PatientTable,
-				        {"id", "gender", "birthDate", "deceasedDateTime", "identifier", "name", "telecom",
+				        {"id", "gender", "birthDate", "deceased", "identifier", "name", "telecom",
 				         "address", "maritalStatus", "communication", "photo"},
 				        MissingField.UseNull
 				    ),
+				    AddedDeceased = Table.AddColumn(SelectedRaw, "deceasedDateTime", each ChoiceField([deceased], "deceased", "DateTime")),
+				    SelectedFields = Table.RemoveColumns(AddedDeceased, {"deceased"}),
 				
 				    // Step 3: Reduce each repeating element to a single entry, so the table
 				    // stays at one row per patient. The identifier is picked by type (MR,

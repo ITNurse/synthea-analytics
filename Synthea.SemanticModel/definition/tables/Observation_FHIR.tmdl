@@ -192,7 +192,7 @@ table Observation_FHIR
 
 	partition Observation_FHIR = m
 		mode: import
-		source =
+		source = ```
 				let
 				    // Step 1: Connect with the FHIR connector and open the Observation resources.
 				    // 80,000+ observations take a while to page through. To load fewer, add a
@@ -244,17 +244,37 @@ table Observation_FHIR
 				    ReferenceID = (reference as any) as nullable text =>
 				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
 				
+				    // Reads one type from a FHIR choice element (value[x], deceased[x] and
+				    // so on). The FHIR connector puts all of the options in one column named
+				    // after the element, so this picks out the type we want. Matching ignores
+				    // capitalization, since primitive type names are lowercase in FHIR
+				    // (dateTime, boolean, string) and complex ones are capitalized (Quantity).
+				    ChoiceField = (choice as any, base as text, typeName as text) as any =>
+				        if choice = null or not (choice is record) then null
+				        else
+				            let
+				                wanted = {Text.Lower(base & typeName), Text.Lower(typeName)},
+				                matches = List.Select(Record.FieldNames(choice), each List.Contains(wanted, Text.Lower(_)))
+				            in
+				                if List.IsEmpty(matches) then null else Record.Field(choice, matches{0}),
+				                
 				    // ---------------------------------------------------------------
 				    // Transformation steps
 				    // ---------------------------------------------------------------
 				
-				    // Step 2: Keep only the fields Synthea fills in that the report uses
-				    SelectedFields = Table.SelectColumns(
+				    // Step 2: Keep only the fields the report uses. value[x] and effective[x]
+				    // are choice elements, which the FHIR connector returns as single
+				    // "value" and "effective" columns, so split them into one column per type.
+				    SelectedRaw = Table.SelectColumns(
 				        ObservationTable,
-				        {"id", "status", "category", "code", "subject", "encounter", "effectiveDateTime", "issued",
-				         "valueQuantity", "valueCodeableConcept", "valueString", "component"},
+				        {"id", "status", "category", "code", "subject", "encounter", "effective", "issued", "value", "component"},
 				        MissingField.UseNull
 				    ),
+				    AddedEffective = Table.AddColumn(SelectedRaw, "effectiveDateTime", each ChoiceField([effective], "effective", "DateTime")),
+				    AddedQuantity = Table.AddColumn(AddedEffective, "valueQuantity", each ChoiceField([value], "value", "Quantity")),
+				    AddedCodeableConcept = Table.AddColumn(AddedQuantity, "valueCodeableConcept", each ChoiceField([value], "value", "CodeableConcept")),
+				    AddedString = Table.AddColumn(AddedCodeableConcept, "valueString", each ChoiceField([value], "value", "String")),
+				    SelectedFields = Table.RemoveColumns(AddedString, {"effective", "value"}),
 				
 				    // Step 3: Count the components (e.g. systolic and diastolic in a blood
 				    // pressure), then drop them. The components themselves are in the
@@ -324,6 +344,7 @@ table Observation_FHIR
 				    })
 				in
 				    ReorderedColumns
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 

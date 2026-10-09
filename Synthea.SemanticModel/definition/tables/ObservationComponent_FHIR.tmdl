@@ -101,7 +101,7 @@ table ObservationComponent_FHIR
 
 	partition ObservationComponent_FHIR = m
 		mode: import
-		source =
+		source = ```
 				let
 				    // Step 1: Connect with the FHIR connector and open the Observation resources.
 				    // Use the same search filter as the Observation query so the two match.
@@ -128,6 +128,20 @@ table ObservationComponent_FHIR
 				
 				    FirstCoding = (concept as any) as nullable record =>
 				        FirstItem(GetField(FirstItem(concept), "coding")),
+				    
+				    // Reads one type from a FHIR choice element (value[x], deceased[x] and
+				    // so on). The FHIR connector puts all of the options in one column named
+				    // after the element, so this picks out the type we want. Matching ignores
+				    // capitalization, since primitive type names are lowercase in FHIR
+				    // (dateTime, boolean, string) and complex ones are capitalized (Quantity).
+				    ChoiceField = (choice as any, base as text, typeName as text) as any =>
+				        if choice = null or not (choice is record) then null
+				        else
+				            let
+				                wanted = {Text.Lower(base & typeName), Text.Lower(typeName)},
+				                matches = List.Select(Record.FieldNames(choice), each List.Contains(wanted, Text.Lower(_)))
+				            in
+				                if List.IsEmpty(matches) then null else Record.Field(choice, matches{0}),
 				
 				    // ---------------------------------------------------------------
 				    // Transformation steps
@@ -143,10 +157,13 @@ table ObservationComponent_FHIR
 				    // ObservationID, the key back to the Observation query.
 				    RenamedID = Table.RenameColumns(KeptWithComponents, {{"id", "ObservationID"}}),
 				    ExpandedComponentList = Table.ExpandListColumn(RenamedID, "component"),
-				    ExpandedComponentFields = Table.ExpandRecordColumn(ExpandedComponentList, "component",
-				        {"code", "valueQuantity", "valueCodeableConcept", "valueString"},
-				        {"component.code", "component.valueQuantity", "component.valueCodeableConcept", "component.valueString"}
+				    ExpandedComponentRaw = Table.ExpandRecordColumn(ExpandedComponentList, "component",
+				        {"code", "value"}, {"component.code", "component.value"}
 				    ),
+				    AddedComponentQuantity = Table.AddColumn(ExpandedComponentRaw, "component.valueQuantity", each ChoiceField([component.value], "value", "Quantity")),
+				    AddedComponentCodeableConcept = Table.AddColumn(AddedComponentQuantity, "component.valueCodeableConcept", each ChoiceField([component.value], "value", "CodeableConcept")),
+				    AddedComponentString = Table.AddColumn(AddedComponentCodeableConcept, "component.valueString", each ChoiceField([component.value], "value", "String")),
+				    ExpandedComponentFields = Table.RemoveColumns(AddedComponentString, {"component.value"}),
 				
 				    // Step 4: Reduce the coded elements to their first Coding
 				    PickedCodings = Table.TransformColumns(ExpandedComponentFields, {
@@ -171,6 +188,7 @@ table ObservationComponent_FHIR
 				    })
 				in
 				    ChangedTypes
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 

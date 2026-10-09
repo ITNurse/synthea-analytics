@@ -109,7 +109,7 @@ table Immunization_FHIR
 
 	partition Immunization_FHIR = m
 		mode: import
-		source =
+		source = ```
 				let
 				    // Step 1: Connect with the FHIR connector and open the Immunization resources.
 				    // The connector follows the paging links itself, so every immunization loads.
@@ -146,17 +146,33 @@ table Immunization_FHIR
 				    // Pulls the resource ID off the end of a reference like "Patient/123"
 				    ReferenceID = (reference as any) as nullable text =>
 				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				    
+				    // Reads one type from a FHIR choice element (value[x], deceased[x] and
+				    // so on). The FHIR connector puts all of the options in one column named
+				    // after the element, so this picks out the type we want. Matching ignores
+				    // capitalization, since primitive type names are lowercase in FHIR
+				    // (dateTime, boolean, string) and complex ones are capitalized (Quantity).
+				    ChoiceField = (choice as any, base as text, typeName as text) as any =>
+				        if choice = null or not (choice is record) then null
+				        else
+				            let
+				                wanted = {Text.Lower(base & typeName), Text.Lower(typeName)},
+				                matches = List.Select(Record.FieldNames(choice), each List.Contains(wanted, Text.Lower(_)))
+				            in
+				                if List.IsEmpty(matches) then null else Record.Field(choice, matches{0}),
 				
 				    // ---------------------------------------------------------------
 				    // Transformation steps
 				    // ---------------------------------------------------------------
 				
 				    // Step 2: Keep only the fields Synthea fills in that the report uses
-				    SelectedFields = Table.SelectColumns(
+				    SelectedRaw = Table.SelectColumns(
 				        ImmunizationTable,
-				        {"id", "status", "vaccineCode", "patient", "encounter", "location", "occurrenceDateTime", "primarySource"},
+				        {"id", "status", "vaccineCode", "patient", "encounter", "location", "occurrence", "primarySource"},
 				        MissingField.UseNull
 				    ),
+				    AddedOccurrence = Table.AddColumn(SelectedRaw, "occurrenceDateTime", each ChoiceField([occurrence], "occurrence", "DateTime")),
+				    SelectedFields = Table.RemoveColumns(AddedOccurrence, {"occurrence"}),
 				
 				    // Step 3: Reduce the vaccine code to its first Coding, so the table stays
 				    // at one row per immunization. The field profile shows it never repeats.
@@ -201,6 +217,7 @@ table Immunization_FHIR
 				    })
 				in
 				    ReorderedColumns
+				```
 
 	annotation PBI_NavigationStepName = Navigation
 
