@@ -1,0 +1,442 @@
+table Patient_FHIR
+	lineageTag: 979a8569-3f45-4af9-b98e-c8d7f9a890b7
+
+	column id
+		dataType: string
+		lineageTag: 3207e478-6144-4ccb-b3dc-ce3e7962850e
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 36ecc595-b71c-47f6-aeb0-9af4f86ea602
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column birthDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b6ef4f80-4a5b-470f-85fa-b9fe3bec996d
+		summarizeBy: none
+		sourceColumn: birthDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column deceasedDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6a968e02-7aea-440b-9fb2-4aada87d0d97
+		summarizeBy: none
+		sourceColumn: deceasedDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'identifier:MR.system'
+		dataType: string
+		lineageTag: 0a6d0520-a402-44f8-9895-353c45cf50a5
+		summarizeBy: none
+		sourceColumn: identifier:MR.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'identifier:MR.value'
+		dataType: string
+		lineageTag: fb904021-d94a-4adc-8847-6f68bdc8516b
+		summarizeBy: none
+		sourceColumn: identifier:MR.value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'name.prefix'
+		dataType: string
+		lineageTag: 88c2d34e-7117-4a68-88bb-b0a6783202b8
+		summarizeBy: none
+		sourceColumn: name.prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'name.given'
+		dataType: string
+		lineageTag: 950991a5-789f-4d7f-ab77-019828251a81
+		summarizeBy: none
+		sourceColumn: name.given
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'name.family'
+		dataType: string
+		lineageTag: 70038db9-3cd0-498c-9d79-13179731777f
+		summarizeBy: none
+		sourceColumn: name.family
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'address.line'
+		dataType: string
+		lineageTag: ef954f83-4b9e-4216-ac9d-b620360c257b
+		summarizeBy: none
+		sourceColumn: address.line
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'address.city'
+		dataType: string
+		lineageTag: 7a78e6b1-9737-4f2e-897f-0bb384db0583
+		summarizeBy: none
+		sourceColumn: address.city
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'address.state'
+		dataType: string
+		lineageTag: 8f8d6fa5-73b4-45ac-8a46-c4f283b97ec3
+		summarizeBy: none
+		sourceColumn: address.state
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'address.postalCode'
+		dataType: string
+		lineageTag: b7102e18-51c8-48e9-a287-eae74118b966
+		summarizeBy: none
+		sourceColumn: address.postalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'address.country'
+		dataType: string
+		lineageTag: 93e5c23e-197e-4202-b20b-01485ce8f434
+		summarizeBy: none
+		sourceColumn: address.country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maritalStatus.coding.system'
+		dataType: string
+		lineageTag: bc215342-ebdd-4c3b-ad27-15c7fb4517e4
+		summarizeBy: none
+		sourceColumn: maritalStatus.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maritalStatus.coding.code'
+		dataType: string
+		lineageTag: 445dd88b-dd24-43c3-9e8b-b9ab9213a8c2
+		summarizeBy: none
+		sourceColumn: maritalStatus.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'maritalStatus.coding.display'
+		dataType: string
+		lineageTag: 621327d8-cb8a-4cc1-86ff-d8c38e5d693e
+		summarizeBy: none
+		sourceColumn: maritalStatus.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'communication.language.coding.system'
+		dataType: string
+		lineageTag: b5096bfb-a7e9-477b-8307-bfc217a64095
+		summarizeBy: none
+		sourceColumn: communication.language.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'communication.language.coding.code'
+		dataType: string
+		lineageTag: fc5b2b9f-b21c-4140-bec7-5c01e1113654
+		summarizeBy: none
+		sourceColumn: communication.language.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'communication.language.coding.display'
+		dataType: string
+		lineageTag: 7505e1c7-efde-46b7-ab47-98083bb491b7
+		summarizeBy: none
+		sourceColumn: communication.language.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'photo.contentType'
+		dataType: string
+		lineageTag: fe48d71b-7ba4-44ed-918d-5594ad5690fc
+		summarizeBy: none
+		sourceColumn: photo.contentType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'photo.data'
+		dataType: string
+		lineageTag: 3f10a95f-beb1-4d0e-8417-5ec2391f783c
+		summarizeBy: none
+		sourceColumn: photo.data
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsDeceased
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a38cdcc2-1dfa-4d7b-aa04-ab058c13f72a
+		summarizeBy: none
+		sourceColumn: IsDeceased
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: b39057a2-2c66-46ed-a34c-0bdb28a38f9c
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'address.extension:geolocation.latitude'
+		dataType: double
+		lineageTag: 2baf8c51-4f42-4b6d-9bae-6e5d56ea830e
+		summarizeBy: sum
+		sourceColumn: address.extension:geolocation.latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'address.extension:geolocation.longitude'
+		dataType: double
+		lineageTag: 9dd89591-a83f-414f-b07d-e9790f4cb038
+		summarizeBy: sum
+		sourceColumn: address.extension:geolocation.longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'telecom.phone'
+		dataType: string
+		lineageTag: 9f014a7c-644f-4246-9bb9-6a503cbeb0ba
+		summarizeBy: none
+		sourceColumn: telecom.phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhotoDataUri
+		dataType: string
+		lineageTag: 332781cb-92ef-4a3c-be7f-7acbe98c01c1
+		summarizeBy: none
+		sourceColumn: PhotoDataUri
+
+		annotation SummarizationSetBy = Automatic
+
+	column fullUrl
+		dataType: string
+		lineageTag: 030f93ff-e61f-4f19-a0f6-fb7f58260434
+		summarizeBy: none
+		sourceColumn: fullUrl
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Patient_FHIR = m
+		mode: import
+		source = ```
+				let
+				    // Step 1: Connect with the FHIR connector and open the Patient resources.
+				    // The connector follows the paging links itself, so every patient loads.
+				    Source = Fhir.Contents("http://localhost:8081/fhir", null),
+				    PatientTable = Source{[Name = "Patient"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // Returns the entry with a given "use" (e.g. official), falling back to
+				    // the first entry if none is marked with that use
+				    PickByUse = (value as any, use as text) as nullable record =>
+				        let
+				            items = AsList(value),
+				            matches = if items = null then {} else List.Select(items, each GetField(_, "use") = use)
+				        in
+				            if items = null or List.IsEmpty(items) then null
+				            else if List.IsEmpty(matches) then items{0}
+				            else matches{0},
+				
+				    // Returns the identifier whose type has a given code (e.g. MR). No
+				    // fallback: if there's no match it returns null, so a different kind
+				    // of identifier is never shown by mistake.
+				    PickByTypeCode = (value as any, code as text) as nullable record =>
+				        let
+				            items = AsList(value),
+				            hasCode = (item) =>
+				                let codings = AsList(GetField(GetField(item, "type"), "coding"))
+				                in codings <> null and List.AnyTrue(List.Transform(codings, each GetField(_, "code") = code)),
+				            matches = if items = null then {} else List.Select(items, hasCode)
+				        in
+				            if List.IsEmpty(matches) then null else matches{0},
+				
+				    // Returns the extension with a given url from a list of extensions
+				    FindExtension = (extensions as any, url as text) as nullable record =>
+				        let
+				            items = AsList(extensions),
+				            matches = if items = null then {} else List.Select(items, each GetField(_, "url") = url)
+				        in
+				            if List.IsEmpty(matches) then null else matches{0},
+				
+				    // Reads latitude or longitude from an address's geolocation extension
+				    GeoValue = (address as any, part as text) as nullable number =>
+				        let
+				            geolocation = FindExtension(GetField(address, "extension"), "http://hl7.org/fhir/StructureDefinition/geolocation"),
+				            coordinate = FindExtension(GetField(geolocation, "extension"), part)
+				        in
+				            GetField(coordinate, "valueDecimal"),
+				
+				    // Returns the value of the first telecom entry for a given system (e.g. phone)
+				    TelecomValue = (value as any, system as text) as nullable text =>
+				        let
+				            items = AsList(value),
+				            matches = if items = null then {} else List.Select(items, each GetField(_, "system") = system)
+				        in
+				            if List.IsEmpty(matches) then null else GetField(matches{0}, "value"),
+				
+				    // Joins a repeating text element (given names, prefixes, address lines)
+				    // into one string
+				    JoinText = (value as any, separator as text) as nullable text =>
+				        let items = AsList(value) in
+				        if items = null then null
+				        else Text.Combine(
+				            List.Transform(items, each if _ is record then Text.From(Record.FieldValues(_){0}) else Text.From(_)),
+				            separator
+				        ),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields the report uses. MissingField.UseNull adds
+				    // an empty column if a field isn't present at all (Synthea patients have
+				    // no photo, for example), so later steps don't break.
+				    SelectedFields = Table.SelectColumns(
+				        PatientTable,
+				        {"id", "gender", "birthDate", "deceasedDateTime", "identifier", "name", "telecom",
+				         "address", "maritalStatus", "communication", "photo"},
+				        MissingField.UseNull
+				    ),
+				
+				    // Step 3: Reduce each repeating element to a single entry, so the table
+				    // stays at one row per patient. The identifier is picked by type (MR,
+				    // medical record number) rather than position, and the name by use.
+				    PickedElements = Table.TransformColumns(SelectedFields, {
+				        {"name", each PickByUse(_, "official")},
+				        {"identifier", each PickByTypeCode(_, "MR")},
+				        {"address", FirstItem},
+				        {"maritalStatus", FirstCoding},
+				        {"communication", each FirstCoding(GetField(FirstItem(_), "language"))},
+				        {"photo", FirstItem}
+				    }),
+				
+				    // Step 4: Expand the name and join the repeating parts into text
+				    ExpandedName = Table.ExpandRecordColumn(PickedElements, "name", {"prefix", "given", "family"}, {"name.prefix", "name.given", "name.family"}),
+				    CombinedNameParts = Table.TransformColumns(ExpandedName, {
+				        {"name.prefix", each JoinText(_, " "), type nullable text},
+				        {"name.given", each JoinText(_, " "), type nullable text}
+				    }),
+				
+				    // Step 5: Parse dates, flag deceased patients, and calculate age in
+				    // whole years. For deceased patients, age is their age at death.
+				    ParsedDates = Table.TransformColumns(CombinedNameParts, {
+				        {"birthDate", each try Date.From(_) otherwise null, type nullable date},
+				        {"deceasedDateTime", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
+				    }),
+				    AddedIsDeceased = Table.AddColumn(ParsedDates, "IsDeceased", each [deceasedDateTime] <> null, type logical),
+				    AddedAge = Table.AddColumn(AddedIsDeceased, "Age", each
+				        if [birthDate] = null then null
+				        else
+				            let
+				                asOf = if [deceasedDateTime] = null then Date.From(DateTime.LocalNow()) else Date.From([deceasedDateTime]),
+				                years = Date.Year(asOf) - Date.Year([birthDate])
+				            in
+				                // Subtract a year if the birthday hadn't come around yet that year
+				                if Date.AddYears([birthDate], years) > asOf then years - 1 else years,
+				        Int64.Type
+				    ),
+				
+				    // Step 6: Expand the medical record number (MR), our stand-in for a
+				    // Canadian health card number
+				    ExpandedIdentifier = Table.ExpandRecordColumn(AddedAge, "identifier", {"system", "value"}, {"identifier:MR.system", "identifier:MR.value"}),
+				
+				    // Step 7: Pull latitude and longitude from the address's geolocation
+				    // extension (for map visuals), then expand the address itself
+				    AddedLatitude = Table.AddColumn(ExpandedIdentifier, "address.extension:geolocation.latitude", each GeoValue([address], "latitude"), type nullable number),
+				    AddedLongitude = Table.AddColumn(AddedLatitude, "address.extension:geolocation.longitude", each GeoValue([address], "longitude"), type nullable number),
+				    ExpandedAddress = Table.ExpandRecordColumn(AddedLongitude, "address",
+				        {"line", "city", "state", "postalCode", "country"},
+				        {"address.line", "address.city", "address.state", "address.postalCode", "address.country"}
+				    ),
+				    CombinedAddressLine = Table.TransformColumns(ExpandedAddress, {{"address.line", each JoinText(_, ","), type nullable text}}),
+				
+				    // Step 8: Expand marital status and preferred language codes
+				     ExpandedMaritalStatus = Table.ExpandRecordColumn(CombinedAddressLine, "maritalStatus", {"system", "code", "display"}, {"maritalStatus.coding.system", "maritalStatus.coding.code", "maritalStatus.coding.display"}),
+				    ExpandedLanguage = Table.ExpandRecordColumn(ExpandedMaritalStatus, "communication", {"system", "code", "display"}, {"communication.language.coding.system", "communication.language.coding.code", "communication.language.coding.display"}),
+				    
+				    // Step 9: Pull out the phone number by telecom system
+				    AddedPhone = Table.AddColumn(ExpandedLanguage, "telecom.phone", each TelecomValue([telecom], "phone"), type nullable text),
+				    RemovedTelecom = Table.RemoveColumns(AddedPhone, {"telecom"}),
+				
+				    // Step 10: Expand the photo and build a data URI that image visuals can
+				    // display. Stays null when there is no photo (always the case for Synthea).
+				    ExpandedPhoto = Table.ExpandRecordColumn(RemovedTelecom, "photo", {"contentType", "data"}, {"photo.contentType", "photo.data"}),
+				    AddedPhotoDataUri = Table.AddColumn(ExpandedPhoto, "PhotoDataUri", each
+				        if [photo.data] = null then null else "data:" & [photo.contentType] & ";base64," & [photo.data],
+				        type nullable text
+				    ),
+				
+				    // Step 11: Rebuild fullUrl (the FHIR connector doesn't return it) and set
+				    // column types
+				    AddedFullUrl = Table.AddColumn(AddedPhotoDataUri, "fullUrl", each "http://localhost:8081/fhir/Patient/" & [id], type text),
+				    ChangedTypes = Table.TransformColumnTypes(AddedFullUrl, {
+				        {"id", type text}, {"gender", type text}, {"name.family", type text},
+				        {"identifier:MR.system", type text}, {"identifier:MR.value", type text},
+				        {"address.city", type text}, {"address.state", type text},
+				        {"address.postalCode", type text}, {"address.country", type text},
+				        {"maritalStatus.coding.code", type text}, {"maritalStatus.coding.display", type text},
+				        {"maritalStatus.coding.system", type text}, {"communication.language.coding.system", type text},
+				        {"communication.language.coding.code", type text}, {"communication.language.coding.display", type text},
+				        {"photo.contentType", type text}, {"photo.data", type text}
+				    })
+				in
+				    ChangedTypes
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "27873969b68194b2b6c6",
+  "position": {
+    "x": 9.672598465041748,
+    "y": 0,
+    "z": 0,
+    "height": 719.91768575525009,
+    "width": 1270.5648983722695,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.family"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.family",
+              "nativeQueryRef": "name.family"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.given"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.given",
+              "nativeQueryRef": "name.given"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Condition_FHIR"
+                    }
+                  },
+                  "Property": "category.coding.code"
+                }
+              },
+              "queryRef": "Condition_FHIR.category.coding.code",
+              "nativeQueryRef": "category.coding.code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Condition_FHIR"
+                    }
+                  },
+                  "Property": "clinicalStatus.coding.code"
+                }
+              },
+              "queryRef": "Condition_FHIR.clinicalStatus.coding.code",
+              "nativeQueryRef": "clinicalStatus.coding.code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Condition_FHIR"
+                    }
+                  },
+                  "Property": "code.coding.display"
+                }
+              },
+              "queryRef": "Condition_FHIR.code.coding.display",
+              "nativeQueryRef": "code.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Condition_FHIR"
+                    }
+                  },
+                  "Property": "verificationStatus.coding.code"
+                }
+              },
+              "queryRef": "Condition_FHIR.verificationStatus.coding.code",
+              "nativeQueryRef": "verificationStatus.coding.code"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

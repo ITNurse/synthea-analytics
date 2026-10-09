@@ -1,0 +1,331 @@
+table Observation_FHIR
+	lineageTag: 6768dfea-9aaa-44db-93b9-bca81799c442
+
+	column id
+		dataType: string
+		lineageTag: 15100793-7208-4a26-9176-59294051f818
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: string
+		lineageTag: a71e785a-1451-44e2-9674-a945ea20b8e5
+		summarizeBy: none
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EncounterID
+		dataType: string
+		lineageTag: bb7bdf6b-f530-4929-8c4a-5ca7806f6223
+		summarizeBy: none
+		sourceColumn: EncounterID
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: efdb52e1-1ee5-4434-a214-c7f6a1bd6f8a
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.code'
+		dataType: string
+		lineageTag: e83fe898-e294-4bb9-99d5-f7eec0113597
+		summarizeBy: none
+		sourceColumn: category.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.display'
+		dataType: string
+		lineageTag: 66398eff-2259-4ceb-a9a4-b4637b8598c4
+		summarizeBy: none
+		sourceColumn: category.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.code'
+		dataType: string
+		lineageTag: ba545b65-3987-4668-9a06-a7acaa36af92
+		summarizeBy: none
+		sourceColumn: code.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.display'
+		dataType: string
+		lineageTag: bd479cc3-78f2-4767-8f8c-77417c652466
+		summarizeBy: none
+		sourceColumn: code.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'valueQuantity.value'
+		dataType: double
+		lineageTag: 9c7eb2b6-c906-434c-b9ed-6144a9889225
+		summarizeBy: sum
+		sourceColumn: valueQuantity.value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'valueQuantity.unit'
+		dataType: string
+		lineageTag: efa39904-8a86-4176-87a3-95b0034c99d7
+		summarizeBy: none
+		sourceColumn: valueQuantity.unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'valueCodeableConcept.coding.code'
+		dataType: string
+		lineageTag: f9ea0199-d6d7-4286-96df-bf6fac6245c5
+		summarizeBy: none
+		sourceColumn: valueCodeableConcept.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'valueCodeableConcept.coding.display'
+		dataType: string
+		lineageTag: 90b98c04-f203-434e-88f1-a48e9c6f4fe1
+		summarizeBy: none
+		sourceColumn: valueCodeableConcept.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column valueString
+		dataType: string
+		lineageTag: b9966a38-17d9-4863-b727-87e27627a792
+		summarizeBy: none
+		sourceColumn: valueString
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComponentCount
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a2616b4-e614-4c28-9371-9b931f5a1e93
+		summarizeBy: sum
+		sourceColumn: ComponentCount
+
+		annotation SummarizationSetBy = Automatic
+
+	column effectiveDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 64fc36d1-cc03-449c-afee-a6a3b3e662df
+		summarizeBy: none
+		sourceColumn: effectiveDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column issued
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: abb774f8-3514-44b5-8489-55b6e2a20f87
+		summarizeBy: none
+		sourceColumn: issued
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.system'
+		dataType: string
+		lineageTag: 0135e543-0360-45bf-b772-e92cc4cef360
+		summarizeBy: none
+		sourceColumn: category.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.system'
+		dataType: string
+		lineageTag: 66be138c-582f-40f6-9184-131201d23c66
+		summarizeBy: none
+		sourceColumn: code.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'valueQuantity.system'
+		dataType: string
+		lineageTag: 3a6cbb99-a7d2-4165-a4d1-7cb7581c0a1f
+		summarizeBy: none
+		sourceColumn: valueQuantity.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'valueQuantity.code'
+		dataType: string
+		lineageTag: 14b9f2f5-bb92-4795-8f46-a9011baf9d3e
+		summarizeBy: none
+		sourceColumn: valueQuantity.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'valueCodeableConcept.coding.system'
+		dataType: string
+		lineageTag: 6e4e2f94-5379-406f-85cc-3c35ec5697f2
+		summarizeBy: none
+		sourceColumn: valueCodeableConcept.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'subject.reference'
+		dataType: string
+		lineageTag: 421f2342-e72b-4cde-b88b-79ed49ec3f8d
+		summarizeBy: none
+		sourceColumn: subject.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'encounter.reference'
+		dataType: string
+		lineageTag: ce2d38b6-f1ec-4dfc-9adf-63affcbadcfa
+		summarizeBy: none
+		sourceColumn: encounter.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Observation_FHIR = m
+		mode: import
+		source =
+				let
+				    // Step 1: Connect with the FHIR connector and open the Observation resources.
+				    // 80,000+ observations take a while to page through. To load fewer, add a
+				    // search filter here, for example "Observation?category=laboratory" or
+				    // "Observation?category=vital-signs,laboratory".
+				    SearchQuery = "Observation?",
+				    Source = Fhir.Contents("http://localhost:8081/fhir", SearchQuery),
+				    ObservationTable = Source{[Name = "Observation"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // Returns the Coding from a given code system (e.g. LOINC), falling back
+				    // to the first Coding if none match. Used where a code has more than one.
+				    PreferredCoding = (concept as any, system as text) as nullable record =>
+				        let
+				            codings = AsList(GetField(FirstItem(concept), "coding")),
+				            matches = if codings = null then {} else List.Select(codings, each GetField(_, "system") = system)
+				        in
+				            if codings = null or List.IsEmpty(codings) then null
+				            else if List.IsEmpty(matches) then codings{0}
+				            else matches{0},
+				
+				    // Pulls the resource ID off the end of a reference like "Patient/123"
+				    ReferenceID = (reference as any) as nullable text =>
+				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields Synthea fills in that the report uses
+				    SelectedFields = Table.SelectColumns(
+				        ObservationTable,
+				        {"id", "status", "category", "code", "subject", "encounter", "effectiveDateTime", "issued",
+				         "valueQuantity", "valueCodeableConcept", "valueString", "component"},
+				        MissingField.UseNull
+				    ),
+				
+				    // Step 3: Count the components (e.g. systolic and diastolic in a blood
+				    // pressure), then drop them. The components themselves are in the
+				    // ObservationComponent query, one row per component.
+				    AddedComponentCount = Table.AddColumn(SelectedFields, "ComponentCount", each
+				        let items = AsList([component]) in if items = null then 0 else List.Count(items),
+				        Int64.Type
+				    ),
+				    RemovedComponent = Table.RemoveColumns(AddedComponentCount, {"component"}),
+				
+				    // Step 4: Reduce each coded element to a single Coding, so the table
+				    // stays at one row per observation. The code can have two Codings, so
+				    // the LOINC one is preferred.
+				    PickedCodings = Table.TransformColumns(RemovedComponent, {
+				        {"category", FirstCoding},
+				        {"code", each PreferredCoding(_, "http://loinc.org")},
+				        {"valueCodeableConcept", FirstCoding}
+				    }),
+				
+				    // Step 5: Expand the category (e.g. vital-signs, laboratory, survey)
+				    // and the observation code (LOINC in Synthea)
+				    ExpandedCategory = Table.ExpandRecordColumn(PickedCodings, "category", {"system", "code", "display"}, {"category.coding.system", "category.coding.code", "category.coding.display"}),
+				    ExpandedCode = Table.ExpandRecordColumn(ExpandedCategory, "code", {"system", "code", "display"}, {"code.coding.system", "code.coding.code", "code.coding.display"}),
+				
+				    // Step 6: Expand the result. Each observation has one value type:
+				    // a number with units (valueQuantity), a code (valueCodeableConcept),
+				    // or text (valueString). Observations with components have none.
+				    ExpandedQuantity = Table.ExpandRecordColumn(ExpandedCode, "valueQuantity", {"value", "unit", "system", "code"}, {"valueQuantity.value", "valueQuantity.unit", "valueQuantity.system", "valueQuantity.code"}),
+				    ExpandedValueCoding = Table.ExpandRecordColumn(ExpandedQuantity, "valueCodeableConcept", {"system", "code", "display"}, {"valueCodeableConcept.coding.system", "valueCodeableConcept.coding.code", "valueCodeableConcept.coding.display"}),
+				
+				    // Step 7: Expand the patient and encounter references and pull out their
+				    // IDs, which match the id columns in the Patient and Encounter queries
+				    ExpandedSubject = Table.ExpandRecordColumn(ExpandedValueCoding, "subject", {"reference"}, {"subject.reference"}),
+				    ExpandedEncounter = Table.ExpandRecordColumn(ExpandedSubject, "encounter", {"reference"}, {"encounter.reference"}),
+				    AddedPatientID = Table.AddColumn(ExpandedEncounter, "PatientID", each ReferenceID([subject.reference]), type nullable text),
+				    AddedEncounterID = Table.AddColumn(AddedPatientID, "EncounterID", each ReferenceID([encounter.reference]), type nullable text),
+				
+				    // Step 8: Parse the dates (when the observation applies, and when the
+				    // result was released)
+				    ParsedDates = Table.TransformColumns(AddedEncounterID, {
+				        {"effectiveDateTime", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone},
+				        {"issued", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
+				    }),
+				
+				    // Step 9: Set column types and put the columns in a readable order
+				    ChangedTypes = Table.TransformColumnTypes(ParsedDates, {
+				        {"id", type text}, {"status", type text},
+				        {"category.coding.system", type text}, {"category.coding.code", type text}, {"category.coding.display", type text},
+				        {"code.coding.system", type text}, {"code.coding.code", type text}, {"code.coding.display", type text},
+				        {"valueQuantity.value", type number}, {"valueQuantity.unit", type text},
+				        {"valueQuantity.system", type text}, {"valueQuantity.code", type text},
+				        {"valueCodeableConcept.coding.system", type text}, {"valueCodeableConcept.coding.code", type text},
+				        {"valueCodeableConcept.coding.display", type text}, {"valueString", type text},
+				        {"subject.reference", type text}, {"encounter.reference", type text}
+				    }),
+				    ReorderedColumns = Table.ReorderColumns(ChangedTypes, {
+				        "id", "PatientID", "EncounterID", "status",
+				        "category.coding.code", "category.coding.display",
+				        "code.coding.code", "code.coding.display",
+				        "valueQuantity.value", "valueQuantity.unit",
+				        "valueCodeableConcept.coding.code", "valueCodeableConcept.coding.display",
+				        "valueString", "ComponentCount",
+				        "effectiveDateTime", "issued",
+				        "category.coding.system", "code.coding.system",
+				        "valueQuantity.system", "valueQuantity.code", "valueCodeableConcept.coding.system",
+				        "subject.reference", "encounter.reference"
+				    })
+				in
+				    ReorderedColumns
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

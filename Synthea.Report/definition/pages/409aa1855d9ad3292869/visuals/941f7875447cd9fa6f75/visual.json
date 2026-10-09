@@ -1,0 +1,210 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "941f7875447cd9fa6f75",
+  "position": {
+    "x": 9.78660494288061,
+    "y": 0,
+    "z": 0,
+    "height": 719.92712611065485,
+    "width": 1270.4236541476891,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.family"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.family",
+              "nativeQueryRef": "name.family"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.given"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.given",
+              "nativeQueryRef": "name.given"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "IsDeceased"
+                }
+              },
+              "queryRef": "Patient_FHIR.IsDeceased",
+              "nativeQueryRef": "IsDeceased"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "birthDate"
+                }
+              },
+              "queryRef": "Patient_FHIR.birthDate",
+              "nativeQueryRef": "birthDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "Age"
+                }
+              },
+              "queryRef": "Sum(Patient_FHIR.Age)",
+              "nativeQueryRef": "Age"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "maritalStatus.coding.code"
+                }
+              },
+              "queryRef": "Patient_FHIR.maritalStatus.coding.code",
+              "nativeQueryRef": "maritalStatus.coding.code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "gender"
+                }
+              },
+              "queryRef": "Patient_FHIR.gender",
+              "nativeQueryRef": "gender"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "communication.language.coding.code"
+                }
+              },
+              "queryRef": "Patient_FHIR.communication.language.coding.code",
+              "nativeQueryRef": "communication.language.coding.code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "address.state"
+                }
+              },
+              "queryRef": "Patient_FHIR.address.state",
+              "nativeQueryRef": "address.state"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ae51240fb3712e45d91c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "867160e7cc25e08cbb50",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "69a9ea3e04a261366d3e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "IsDeceased"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a9be161adf33f7cf21d2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "birthDate"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

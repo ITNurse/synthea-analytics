@@ -1,0 +1,208 @@
+table Immunization_FHIR
+	lineageTag: 7aed7d60-233d-4e1a-b083-100fa53c44a8
+
+	column id
+		dataType: string
+		lineageTag: cfc9ab59-4ec1-4270-abff-b0546d4126ae
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: string
+		lineageTag: ce07f9e1-e739-4feb-95e5-711ec706805e
+		summarizeBy: none
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EncounterID
+		dataType: string
+		lineageTag: 671980b4-f09f-4f8a-9de3-8c289dcec297
+		summarizeBy: none
+		sourceColumn: EncounterID
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 667d5db5-fe5a-4d10-af0d-09cbd9e3e615
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'vaccineCode.coding.code'
+		dataType: string
+		lineageTag: 4bd6fb1b-5b5d-4e28-8a9b-7a9ee11dd438
+		summarizeBy: none
+		sourceColumn: vaccineCode.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'vaccineCode.coding.display'
+		dataType: string
+		lineageTag: 320855eb-a47e-44c0-abfd-572f015d1688
+		summarizeBy: none
+		sourceColumn: vaccineCode.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column occurrenceDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 23365630-fdca-4fb9-bda7-6a4aa6754dd1
+		summarizeBy: none
+		sourceColumn: occurrenceDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'location.display'
+		dataType: string
+		lineageTag: 2ec89b44-1eac-4f31-995b-7c636d67f96c
+		summarizeBy: none
+		sourceColumn: location.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column primarySource
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8a2858c4-3f39-4916-bec0-ca0253cb1270
+		summarizeBy: none
+		sourceColumn: primarySource
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'vaccineCode.coding.system'
+		dataType: string
+		lineageTag: 18c2c76e-85e6-4418-8e41-9a89756e58dc
+		summarizeBy: none
+		sourceColumn: vaccineCode.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'location.reference'
+		dataType: string
+		lineageTag: 8091c9f9-c821-4492-a485-1a0e4e9b41cf
+		summarizeBy: none
+		sourceColumn: location.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'patient.reference'
+		dataType: string
+		lineageTag: 2361bb1d-10b4-464f-a87a-392c85950ea5
+		summarizeBy: none
+		sourceColumn: patient.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'encounter.reference'
+		dataType: string
+		lineageTag: b16cba27-f846-4862-98f8-1cac7894f701
+		summarizeBy: none
+		sourceColumn: encounter.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Immunization_FHIR = m
+		mode: import
+		source =
+				let
+				    // Step 1: Connect with the FHIR connector and open the Immunization resources.
+				    // The connector follows the paging links itself, so every immunization loads.
+				    Source = Fhir.Contents("http://localhost:8081/fhir", "Immunization?"),
+				    ImmunizationTable = Source{[Name = "Immunization"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // Pulls the resource ID off the end of a reference like "Patient/123"
+				    ReferenceID = (reference as any) as nullable text =>
+				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields Synthea fills in that the report uses
+				    SelectedFields = Table.SelectColumns(
+				        ImmunizationTable,
+				        {"id", "status", "vaccineCode", "patient", "encounter", "location", "occurrenceDateTime", "primarySource"},
+				        MissingField.UseNull
+				    ),
+				
+				    // Step 3: Reduce the vaccine code to its first Coding, so the table stays
+				    // at one row per immunization. The field profile shows it never repeats.
+				    PickedCodings = Table.TransformColumns(SelectedFields, {{"vaccineCode", FirstCoding}}),
+				
+				    // Step 4: Expand the vaccine code (CVX in Synthea)
+				    ExpandedVaccineCode = Table.ExpandRecordColumn(PickedCodings, "vaccineCode", {"system", "code", "display"}, {"vaccineCode.coding.system", "vaccineCode.coding.code", "vaccineCode.coding.display"}),
+				
+				    // Step 5: Expand the patient and encounter references and pull out their
+				    // IDs, which match the id columns in the Patient and Encounter queries.
+				    // Immunization uses "patient" rather than "subject" for this reference.
+				    ExpandedPatient = Table.ExpandRecordColumn(ExpandedVaccineCode, "patient", {"reference"}, {"patient.reference"}),
+				    ExpandedEncounter = Table.ExpandRecordColumn(ExpandedPatient, "encounter", {"reference"}, {"encounter.reference"}),
+				    AddedPatientID = Table.AddColumn(ExpandedEncounter, "PatientID", each ReferenceID([patient.reference]), type nullable text),
+				    AddedEncounterID = Table.AddColumn(AddedPatientID, "EncounterID", each ReferenceID([encounter.reference]), type nullable text),
+				
+				    // Step 6: Expand where the vaccine was given. The reference is kept for
+				    // joining to a Location table later.
+				    ExpandedLocation = Table.ExpandRecordColumn(AddedEncounterID, "location", {"reference", "display"}, {"location.reference", "location.display"}),
+				
+				    // Step 7: Parse the date the vaccine was given
+				    ParsedDates = Table.TransformColumns(ExpandedLocation, {
+				        {"occurrenceDateTime", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
+				    }),
+				
+				    // Step 8: Set column types and put the columns in a readable order.
+				    // primarySource is true when the record comes from whoever gave the
+				    // vaccine, rather than being reported by the patient or another source.
+				    ChangedTypes = Table.TransformColumnTypes(ParsedDates, {
+				        {"id", type text}, {"status", type text},
+				        {"vaccineCode.coding.system", type text}, {"vaccineCode.coding.code", type text}, {"vaccineCode.coding.display", type text},
+				        {"patient.reference", type text}, {"encounter.reference", type text},
+				        {"location.reference", type text}, {"location.display", type text},
+				        {"primarySource", type logical}
+				    }),
+				    ReorderedColumns = Table.ReorderColumns(ChangedTypes, {
+				        "id", "PatientID", "EncounterID", "status",
+				        "vaccineCode.coding.code", "vaccineCode.coding.display",
+				        "occurrenceDateTime", "location.display", "primarySource",
+				        "vaccineCode.coding.system", "location.reference",
+				        "patient.reference", "encounter.reference"
+				    })
+				in
+				    ReorderedColumns
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

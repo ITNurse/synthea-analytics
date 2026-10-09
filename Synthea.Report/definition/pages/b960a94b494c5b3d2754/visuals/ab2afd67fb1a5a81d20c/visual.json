@@ -1,0 +1,236 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "ab2afd67fb1a5a81d20c",
+  "position": {
+    "x": 9.8773859652377158,
+    "y": 0,
+    "z": 0,
+    "height": 324.43413901203883,
+    "width": 1270.3837949136509,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.family"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.family",
+              "nativeQueryRef": "name.family"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.given"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.given",
+              "nativeQueryRef": "name.given"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Observation_FHIR"
+                    }
+                  },
+                  "Property": "category.coding.display"
+                }
+              },
+              "queryRef": "Observation_FHIR.category.coding.display",
+              "nativeQueryRef": "category.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Observation_FHIR"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "Observation_FHIR.status",
+              "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Observation_FHIR"
+                    }
+                  },
+                  "Property": "code.coding.code"
+                }
+              },
+              "queryRef": "Observation_FHIR.code.coding.code",
+              "nativeQueryRef": "code.coding.code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Observation_FHIR"
+                    }
+                  },
+                  "Property": "code.coding.display"
+                }
+              },
+              "queryRef": "Observation_FHIR.code.coding.display",
+              "nativeQueryRef": "code.coding.display"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Observation_FHIR"
+                  }
+                },
+                "Property": "code.coding.code"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "739.9937536584446D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Observation_FHIR.code.coding.display"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4cf3565a4264932446d7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b2a08a07dd99e4381382",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f20251b55b36ca91cb14",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation_FHIR"
+              }
+            },
+            "Property": "category.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c39767c6a709f6dc65c3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation_FHIR"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5adc66c60fbcc0da2d04",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation_FHIR"
+              }
+            },
+            "Property": "code.coding.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "80bd6788c9bfa22aa679",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Observation_FHIR"
+              }
+            },
+            "Property": "code.coding.display"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "90ded1ce129f99a72d23",
+  "position": {
+    "x": 9.672598465041748,
+    "y": 0,
+    "z": 0,
+    "height": 719.91768575525009,
+    "width": 1270.5648983722695,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.family"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.family",
+              "nativeQueryRef": "name.family"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.given"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.given",
+              "nativeQueryRef": "name.given"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "class.code"
+                }
+              },
+              "queryRef": "Encounter_FHIR.class.code",
+              "nativeQueryRef": "class.code"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "Encounter_FHIR.status",
+              "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "type.coding.display"
+                }
+              },
+              "queryRef": "Encounter_FHIR.type.coding.display",
+              "nativeQueryRef": "type.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "reasonCode.coding.display"
+                }
+              },
+              "queryRef": "Encounter_FHIR.reasonCode.coding.display",
+              "nativeQueryRef": "reasonCode.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "hospitalization.dischargeDisposition.coding.display"
+                }
+              },
+              "queryRef": "Encounter_FHIR.hospitalization.dischargeDisposition.coding.display",
+              "nativeQueryRef": "hospitalization.dischargeDisposition.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "location.location.display"
+                }
+              },
+              "queryRef": "Encounter_FHIR.location.location.display",
+              "nativeQueryRef": "location.location.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "period.start"
+                }
+              },
+              "queryRef": "Encounter_FHIR.period.start",
+              "nativeQueryRef": "period.start"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "period.end"
+                }
+              },
+              "queryRef": "Encounter_FHIR.period.end",
+              "nativeQueryRef": "period.end"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Encounter_FHIR"
+                    }
+                  },
+                  "Property": "serviceProvider.display"
+                }
+              },
+              "queryRef": "Encounter_FHIR.serviceProvider.display",
+              "nativeQueryRef": "serviceProvider.display"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "0b31214661f3abc38a21",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cbe03b34dd15ebabe7df",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3d0139d10c70acc54fa1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "class.code"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "29886486887570d50f6f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "hospitalization.dischargeDisposition.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "495cfe586920115578bc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "location.location.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9387f8962367e539b213",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "period.start"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9b093abe6555a343ff97",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "period.end"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "dc8fad08b45e8d6c68ea",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "reasonCode.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "812eb2ad8bd1a9770b65",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f1c9f37bd0e2e5540d41",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "type.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2b8592356058632de1c8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Encounter_FHIR"
+              }
+            },
+            "Property": "serviceProvider.display"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

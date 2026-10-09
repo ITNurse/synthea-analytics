@@ -1,0 +1,20 @@
+relationship 07c1faaa-2865-58e9-f216-3da69fa313da
+	fromColumn: Condition_FHIR.PatientID
+	toColumn: Patient_FHIR.id
+
+relationship ec5db5de-e66e-2f4e-f3b3-10415dd4cb6c
+	fromColumn: Immunization_FHIR.PatientID
+	toColumn: Patient_FHIR.id
+
+relationship 2bdc33c1-9db0-542c-8ddf-04319c90d425
+	fromColumn: Observation_FHIR.PatientID
+	toColumn: Patient_FHIR.id
+
+relationship b6a28580-b8df-6485-42ca-9b47249b7848
+	fromColumn: ObservationComponent_FHIR.ObservationID
+	toColumn: Observation_FHIR.id
+
+relationship bf978c4e-fd53-3811-b394-d33c751c6d3a
+	fromColumn: Encounter_FHIR.PatientID
+	toColumn: Patient_FHIR.id
+

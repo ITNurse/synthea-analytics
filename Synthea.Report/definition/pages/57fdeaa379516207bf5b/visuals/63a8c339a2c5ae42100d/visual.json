@@ -1,0 +1,252 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "63a8c339a2c5ae42100d",
+  "position": {
+    "x": 9.8773859652377158,
+    "y": 0,
+    "z": 0,
+    "height": 720.28937654195033,
+    "width": 1270.3837949136509,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.family"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.family",
+              "nativeQueryRef": "name.family"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Patient_FHIR"
+                    }
+                  },
+                  "Property": "name.given"
+                }
+              },
+              "queryRef": "Patient_FHIR.name.given",
+              "nativeQueryRef": "name.given"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Immunization_FHIR"
+                    }
+                  },
+                  "Property": "occurrenceDateTime"
+                }
+              },
+              "queryRef": "Immunization_FHIR.occurrenceDateTime",
+              "nativeQueryRef": "occurrenceDateTime"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Immunization_FHIR"
+                    }
+                  },
+                  "Property": "vaccineCode.coding.display"
+                }
+              },
+              "queryRef": "Immunization_FHIR.vaccineCode.coding.display",
+              "nativeQueryRef": "vaccineCode.coding.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Immunization_FHIR"
+                    }
+                  },
+                  "Property": "location.display"
+                }
+              },
+              "queryRef": "Immunization_FHIR.location.display",
+              "nativeQueryRef": "location.display"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Immunization_FHIR"
+                    }
+                  },
+                  "Property": "encounter.reference"
+                }
+              },
+              "queryRef": "Immunization_FHIR.encounter.reference",
+              "nativeQueryRef": "encounter.reference"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Immunization_FHIR"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "Immunization_FHIR.status",
+              "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Immunization_FHIR"
+                    }
+                  },
+                  "Property": "primarySource"
+                }
+              },
+              "queryRef": "Immunization_FHIR.primarySource",
+              "nativeQueryRef": "primarySource"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "015f0c25e3933d6052ab",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.family"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d60688d577471d7887dd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Patient_FHIR"
+              }
+            },
+            "Property": "name.given"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "df4fd19beae5fe561a12",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Immunization_FHIR"
+              }
+            },
+            "Property": "vaccineCode.coding.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6b149d1815af9580ad5e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Immunization_FHIR"
+              }
+            },
+            "Property": "location.display"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8692c4f5083081bf91ca",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Immunization_FHIR"
+              }
+            },
+            "Property": "encounter.reference"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4c90ba921b43d5d269d5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Immunization_FHIR"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "63a39a85c4e5e08d6fe0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Immunization_FHIR"
+              }
+            },
+            "Property": "primarySource"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "43bbc2c05b0aa25282f0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Immunization_FHIR"
+              }
+            },
+            "Property": "occurrenceDateTime"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

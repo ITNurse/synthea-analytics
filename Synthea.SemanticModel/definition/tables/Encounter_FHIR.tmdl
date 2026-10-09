@@ -1,0 +1,370 @@
+table Encounter_FHIR
+	lineageTag: 11da1b49-bd5e-424d-89f9-d91a720be2e5
+
+	column id
+		dataType: string
+		lineageTag: 99baab40-b003-4825-a167-caa73ef480ec
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: feed0661-7903-4661-b9f9-fa4c49ac78c0
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'class.system'
+		dataType: string
+		lineageTag: 24001c98-769a-48f4-a992-e46a6180c3ed
+		summarizeBy: none
+		sourceColumn: class.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'class.code'
+		dataType: string
+		lineageTag: d2509322-41bf-44d9-8198-c53383419695
+		summarizeBy: none
+		sourceColumn: class.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'type.coding.system'
+		dataType: string
+		lineageTag: b58deede-0c19-47c3-a8ca-509a2bfe3f98
+		summarizeBy: none
+		sourceColumn: type.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'type.coding.code'
+		dataType: string
+		lineageTag: adc0724b-0cfc-4102-8362-50ce3d3368aa
+		summarizeBy: none
+		sourceColumn: type.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'type.coding.display'
+		dataType: string
+		lineageTag: 06a48483-d4be-4faf-a58d-7369cf5133ca
+		summarizeBy: none
+		sourceColumn: type.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'subject.reference'
+		dataType: string
+		lineageTag: 1208a0dd-31cb-4bd9-bbc0-1877b68b677a
+		summarizeBy: none
+		sourceColumn: subject.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'participant.type.coding.system'
+		dataType: string
+		lineageTag: 817c61e5-5406-47ac-9df7-a1d8a5a81c1c
+		summarizeBy: none
+		sourceColumn: participant.type.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'participant.type.coding.code'
+		dataType: string
+		lineageTag: 8cea949d-1168-4868-a095-44aa6dee7256
+		summarizeBy: none
+		sourceColumn: participant.type.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'participant.type.coding.display'
+		dataType: string
+		lineageTag: 95c3a96e-f5dc-4ff2-828b-82366d7ecbb2
+		summarizeBy: none
+		sourceColumn: participant.type.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'participant.individual.reference'
+		dataType: string
+		lineageTag: cba368bc-16f5-45e2-ae71-2b3826cc9a35
+		summarizeBy: none
+		sourceColumn: participant.individual.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'participant.individual.display'
+		dataType: string
+		lineageTag: 29fb241c-ffe7-4e53-882c-528a71f77342
+		summarizeBy: none
+		sourceColumn: participant.individual.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'period.start'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2aac3d70-155f-4ead-99ac-1fe81a5f761e
+		summarizeBy: none
+		sourceColumn: period.start
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'period.end'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8c83486d-3724-4dba-af85-92edb5776256
+		summarizeBy: none
+		sourceColumn: period.end
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.system'
+		dataType: string
+		lineageTag: e71ab9f4-5498-4ca5-86fb-6ee95aa7c5ca
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.code'
+		dataType: string
+		lineageTag: 5dcdfcc8-5edf-441a-9e24-1eb0920956bc
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.display'
+		dataType: string
+		lineageTag: 1d443100-8356-477b-8569-640da9c3d0b4
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'location.location.display'
+		dataType: string
+		lineageTag: fc031d57-5e55-46dd-bcf4-91814e96b3f5
+		summarizeBy: none
+		sourceColumn: location.location.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'serviceProvider.display'
+		dataType: string
+		lineageTag: e09d56a1-2331-4668-9a1b-814f4f4e5af0
+		summarizeBy: none
+		sourceColumn: serviceProvider.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: string
+		lineageTag: c573019a-99e5-4e64-b244-ce9a4cdbd699
+		summarizeBy: none
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'class.display'
+		dataType: string
+		lineageTag: 42153bf7-e40d-4500-bc94-bf7d68f8f60b
+		summarizeBy: none
+		sourceColumn: class.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column DurationMinutes
+		dataType: double
+		lineageTag: 767a8d3f-f790-43c6-a1f8-345e75ffc81c
+		summarizeBy: sum
+		sourceColumn: DurationMinutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'hospitalization.dischargeDisposition.coding.code'
+		dataType: string
+		lineageTag: 49a1a228-c99f-467c-919c-3387fef74d2c
+		summarizeBy: none
+		sourceColumn: hospitalization.dischargeDisposition.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'hospitalization.dischargeDisposition.coding.display'
+		dataType: string
+		lineageTag: 7bb4ddde-ac05-43dd-ad22-d79980e4d6ee
+		summarizeBy: none
+		sourceColumn: hospitalization.dischargeDisposition.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'hospitalization.dischargeDisposition.coding.system'
+		dataType: string
+		lineageTag: 8d031a9c-47b1-449e-b8ba-71edbd038d3f
+		summarizeBy: none
+		sourceColumn: hospitalization.dischargeDisposition.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'location.location.reference'
+		dataType: string
+		lineageTag: c6dafcff-0628-4e0f-8c4c-d2e149dec3a9
+		summarizeBy: none
+		sourceColumn: location.location.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'serviceProvider.reference'
+		dataType: string
+		lineageTag: 687d80ca-c65a-4fb5-9190-e4969c261c0c
+		summarizeBy: none
+		sourceColumn: serviceProvider.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Encounter_FHIR = m
+		mode: import
+		source = ```
+				let
+				    // Step 1: Connect with the FHIR connector and open the Encounter resources.
+				    // The connector follows the paging links itself, so every encounter loads.
+				    Source = Fhir.Contents("http://localhost:8081/fhir", "Encounter?"),
+				    EncounterTable = Source{[Name = "Encounter"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields the report uses. Dropping everything else
+				    // up front means every later step works on a much smaller table.
+				    SelectedFields = Table.SelectColumns(
+				        EncounterTable,
+				        {"id", "status", "class", "type", "reasonCode", "subject", "participant",
+				         "location", "serviceProvider", "period", "hospitalization"},
+				        MissingField.UseNull
+				    ),
+				
+				    // Step 3: Reduce each repeating element to its first entry, so the table
+				    // stays at one row per encounter. The field profile shows none of these
+				    // repeat in Synthea data, so nothing is lost.
+				    PickedElements = Table.TransformColumns(SelectedFields, {
+				        {"class", FirstItem},
+				        {"type", FirstCoding},
+				        {"reasonCode", FirstCoding},
+				        {"participant", FirstItem},
+				        {"location", each GetField(FirstItem(_), "location")},
+				        {"hospitalization", each FirstCoding(GetField(FirstItem(_), "dischargeDisposition"))}
+				    }),
+				
+				    // Step 4: Expand encounter class (e.g. ambulatory, emergency, inpatient).
+				    // Synthea supplies the code but not a display, so class.display is null.
+				    ExpandedClass = Table.ExpandRecordColumn(PickedElements, "class", {"system", "code", "display"}, {"class.system", "class.code", "class.display"}),
+				
+				    // Step 5: Expand the encounter type and the reason for the visit
+				        ExpandedType = Table.ExpandRecordColumn(ExpandedClass, "type", {"system", "code", "display"}, {"type.coding.system", "type.coding.code", "type.coding.display"}),
+				    ExpandedReason = Table.ExpandRecordColumn(ExpandedType, "reasonCode", {"system", "code", "display"}, {"reasonCode.coding.system", "reasonCode.coding.code", "reasonCode.coding.display"}),
+				
+				    // Step 6: Expand the patient reference and pull out the patient's ID,
+				    // which matches the id column in the Patient query for a relationship
+				    ExpandedSubject = Table.ExpandRecordColumn(ExpandedReason, "subject", {"reference"}, {"subject.reference"}),
+				    AddedPatientID = Table.AddColumn(ExpandedSubject, "PatientID", each
+				        if [subject.reference] = null then null else Text.AfterDelimiter([subject.reference], "/", {0, RelativePosition.FromEnd}),
+				        type nullable text
+				    ),
+				
+				    // Step 7: Expand the participant's role and the practitioner who saw the patient
+				    ExpandedParticipant = Table.ExpandRecordColumn(AddedPatientID, "participant", {"type", "individual"}, {"participant.type", "participant.individual"}),
+				    ParticipantTypeCoding = Table.TransformColumns(ExpandedParticipant, {{"participant.type", FirstCoding}}),
+				    ExpandedParticipantType = Table.ExpandRecordColumn(ParticipantTypeCoding, "participant.type", {"system", "code", "display"}, {"participant.type.coding.system", "participant.type.coding.code", "participant.type.coding.display"}),
+				    ExpandedPractitioner = Table.ExpandRecordColumn(ExpandedParticipantType, "participant.individual", {"reference", "display"}, {"participant.individual.reference", "participant.individual.display"}),
+				
+				    // Step 8: Expand where the encounter happened and which organization
+				    // provided it. The references are kept for joining to Location and
+				    // Organization tables later.
+				    ExpandedLocation = Table.ExpandRecordColumn(ExpandedPractitioner, "location", {"reference", "display"}, {"location.location.reference", "location.location.display"}),
+				    ExpandedServiceProvider = Table.ExpandRecordColumn(ExpandedLocation, "serviceProvider", {"reference", "display"}, {"serviceProvider.reference", "serviceProvider.display"}),
+				
+				    // Step 9: Expand the discharge disposition (inpatient stays only)
+				    ExpandedDischarge = Table.ExpandRecordColumn(ExpandedServiceProvider, "hospitalization",
+				        {"system", "code", "display"},
+				        {"hospitalization.dischargeDisposition.coding.system", "hospitalization.dischargeDisposition.coding.code", "hospitalization.dischargeDisposition.coding.display"}
+				    ),
+				
+				    // Step 10: Expand the encounter start and end, and work out its length
+				    ExpandedPeriod = Table.ExpandRecordColumn(ExpandedDischarge, "period", {"start", "end"}, {"period.start", "period.end"}),
+				    TypedPeriod = Table.TransformColumnTypes(ExpandedPeriod, {{"period.start", type datetimezone}, {"period.end", type datetimezone}}),
+				    AddedDurationMinutes = Table.AddColumn(TypedPeriod, "DurationMinutes", each
+				        if [period.start] = null or [period.end] = null then null else Duration.TotalMinutes([period.end] - [period.start]),
+				        type nullable number
+				    ),
+				
+				    // Step 11: Set column types and put the columns in a readable order
+				    ChangedTypes = Table.TransformColumnTypes(AddedDurationMinutes, {
+				        {"id", type text}, {"status", type text},
+				        {"class.system", type text}, {"class.code", type text}, {"class.display", type text},
+				        {"type.coding.system", type text}, {"type.coding.code", type text}, {"type.coding.display", type text},
+				        {"reasonCode.coding.system", type text}, {"reasonCode.coding.code", type text}, {"reasonCode.coding.display", type text},
+				        {"subject.reference", type text},
+				        {"participant.type.coding.system", type text}, {"hospitalization.dischargeDisposition.coding.system", type text},
+				        {"participant.type.coding.code", type text}, {"participant.type.coding.display", type text},
+				        {"participant.individual.reference", type text}, {"participant.individual.display", type text},
+				        {"location.location.reference", type text}, {"location.location.display", type text},
+				        {"serviceProvider.reference", type text}, {"serviceProvider.display", type text},
+				        {"hospitalization.dischargeDisposition.coding.code", type text},
+				        {"hospitalization.dischargeDisposition.coding.display", type text}
+				    }),
+				    ReorderedColumns = Table.ReorderColumns(ChangedTypes, {
+				        "id", "PatientID", "status", "class.code", "class.display",
+				        "type.coding.code", "type.coding.display",
+				        "reasonCode.coding.code", "reasonCode.coding.display",
+				        "period.start", "period.end", "DurationMinutes",
+				        "participant.individual.display", "participant.type.coding.display",
+				        "location.location.display", "serviceProvider.display",
+				        "hospitalization.dischargeDisposition.coding.code", "hospitalization.dischargeDisposition.coding.display",
+				        "class.system", "type.coding.system", "reasonCode.coding.system", "participant.type.coding.system", 
+				        "hospitalization.dischargeDisposition.coding.system","participant.type.coding.code",
+				        "participant.individual.reference", "location.location.reference", "serviceProvider.reference",
+				        "subject.reference"
+				    })
+				in
+				    ReorderedColumns
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

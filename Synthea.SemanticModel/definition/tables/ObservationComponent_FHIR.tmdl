@@ -1,0 +1,178 @@
+table ObservationComponent_FHIR
+	lineageTag: 400e6a40-4067-41ec-9c5f-1739a0d533ca
+
+	column ObservationID
+		dataType: string
+		lineageTag: 22d66048-8c90-4c7c-a950-59ff9b038424
+		summarizeBy: none
+		sourceColumn: ObservationID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.code.coding.system'
+		dataType: string
+		lineageTag: 14206b3e-c982-4d99-ae08-9b12bcee82d1
+		summarizeBy: none
+		sourceColumn: component.code.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.code.coding.code'
+		dataType: string
+		lineageTag: 3382bde8-9588-4305-94b5-ba338bef5a15
+		summarizeBy: none
+		sourceColumn: component.code.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.code.coding.display'
+		dataType: string
+		lineageTag: 047cf181-f36a-49d9-8875-10140cb2561a
+		summarizeBy: none
+		sourceColumn: component.code.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.valueQuantity.value'
+		dataType: double
+		lineageTag: 4258c4d1-ae5f-46cc-9157-15728bff5a6a
+		summarizeBy: sum
+		sourceColumn: component.valueQuantity.value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'component.valueQuantity.unit'
+		dataType: string
+		lineageTag: 518cbe56-6f4f-444b-b6ff-e3300fbe70d9
+		summarizeBy: none
+		sourceColumn: component.valueQuantity.unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.valueQuantity.system'
+		dataType: string
+		lineageTag: c7de8a79-dca0-4bc7-b4a9-799559829008
+		summarizeBy: none
+		sourceColumn: component.valueQuantity.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.valueQuantity.code'
+		dataType: string
+		lineageTag: 97f69c1f-7817-400c-b52a-2018c45ab9ee
+		summarizeBy: none
+		sourceColumn: component.valueQuantity.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.valueCodeableConcept.coding.system'
+		dataType: string
+		lineageTag: 1d9d5417-f6e4-4e24-8110-9ea8a6cc5e91
+		summarizeBy: none
+		sourceColumn: component.valueCodeableConcept.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.valueCodeableConcept.coding.code'
+		dataType: string
+		lineageTag: d9178ae1-2052-46de-a3b4-7a10b630ce8d
+		summarizeBy: none
+		sourceColumn: component.valueCodeableConcept.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.valueCodeableConcept.coding.display'
+		dataType: string
+		lineageTag: 3ddaa8d1-99b6-45e6-ad7c-fbbdfb65b1e9
+		summarizeBy: none
+		sourceColumn: component.valueCodeableConcept.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'component.valueString'
+		dataType: string
+		lineageTag: 9eeec5c2-e242-4895-a3ec-1aeaeaa20cbf
+		summarizeBy: none
+		sourceColumn: component.valueString
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ObservationComponent_FHIR = m
+		mode: import
+		source =
+				let
+				    // Step 1: Connect with the FHIR connector and open the Observation resources.
+				    // Use the same search filter as the Observation query so the two match.
+				    SearchQuery = "Observation?",
+				    Source = Fhir.Contents("http://localhost:8081/fhir", SearchQuery),
+				    ObservationTable = Source{[Name = "Observation"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers (same as the Observation query)
+				    // ---------------------------------------------------------------
+				
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep just the observation id and its components, and keep only
+				    // the observations that have components (about 4% in Synthea)
+				    SelectedFields = Table.SelectColumns(ObservationTable, {"id", "component"}, MissingField.UseNull),
+				    ComponentsAsList = Table.TransformColumns(SelectedFields, {{"component", AsList}}),
+				    KeptWithComponents = Table.SelectRows(ComponentsAsList, each [component] <> null and not List.IsEmpty([component])),
+				
+				    // Step 3: One row per component. The observation's id becomes
+				    // ObservationID, the key back to the Observation query.
+				    RenamedID = Table.RenameColumns(KeptWithComponents, {{"id", "ObservationID"}}),
+				    ExpandedComponentList = Table.ExpandListColumn(RenamedID, "component"),
+				    ExpandedComponentFields = Table.ExpandRecordColumn(ExpandedComponentList, "component",
+				        {"code", "valueQuantity", "valueCodeableConcept", "valueString"},
+				        {"component.code", "component.valueQuantity", "component.valueCodeableConcept", "component.valueString"}
+				    ),
+				
+				    // Step 4: Reduce the coded elements to their first Coding
+				    PickedCodings = Table.TransformColumns(ExpandedComponentFields, {
+				        {"component.code", FirstCoding},
+				        {"component.valueCodeableConcept", FirstCoding}
+				    }),
+				
+				    // Step 5: Expand the component code (e.g. systolic blood pressure, or one
+				    // survey question) and its result
+				    ExpandedCode = Table.ExpandRecordColumn(PickedCodings, "component.code", {"system", "code", "display"}, {"component.code.coding.system", "component.code.coding.code", "component.code.coding.display"}),
+				    ExpandedQuantity = Table.ExpandRecordColumn(ExpandedCode, "component.valueQuantity", {"value", "unit", "system", "code"}, {"component.valueQuantity.value", "component.valueQuantity.unit", "component.valueQuantity.system", "component.valueQuantity.code"}),
+				    ExpandedValueCoding = Table.ExpandRecordColumn(ExpandedQuantity, "component.valueCodeableConcept", {"system", "code", "display"}, {"component.valueCodeableConcept.coding.system", "component.valueCodeableConcept.coding.code", "component.valueCodeableConcept.coding.display"}),
+				
+				    // Step 6: Set column types
+				    ChangedTypes = Table.TransformColumnTypes(ExpandedValueCoding, {
+				        {"ObservationID", type text},
+				        {"component.code.coding.system", type text}, {"component.code.coding.code", type text}, {"component.code.coding.display", type text},
+				        {"component.valueQuantity.value", type number}, {"component.valueQuantity.unit", type text},
+				        {"component.valueQuantity.system", type text}, {"component.valueQuantity.code", type text},
+				        {"component.valueCodeableConcept.coding.system", type text}, {"component.valueCodeableConcept.coding.code", type text},
+				        {"component.valueCodeableConcept.coding.display", type text}, {"component.valueString", type text}
+				    })
+				in
+				    ChangedTypes
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

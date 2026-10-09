@@ -1,0 +1,266 @@
+table Condition_FHIR
+	lineageTag: 74a104c7-4247-4189-96b9-f6e9f41e01ea
+
+	column id
+		dataType: string
+		lineageTag: a7d570ff-2729-41dd-9f2f-f0919cb9647a
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: string
+		lineageTag: 30d690d4-8bb3-408d-ac35-4c7fe93bca4b
+		summarizeBy: none
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EncounterID
+		dataType: string
+		lineageTag: 5f6e98d0-7a4a-496c-8425-8af2be690628
+		summarizeBy: none
+		sourceColumn: EncounterID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.code'
+		dataType: string
+		lineageTag: 09df701b-705a-4337-850a-ce147c994f8d
+		summarizeBy: none
+		sourceColumn: code.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.display'
+		dataType: string
+		lineageTag: 547e15fa-d8cd-4d4d-bcb9-8c80fe5c2edf
+		summarizeBy: none
+		sourceColumn: code.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'clinicalStatus.coding.code'
+		dataType: string
+		lineageTag: b360961e-1e12-4b7e-82c8-ed8b78b786b2
+		summarizeBy: none
+		sourceColumn: clinicalStatus.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'verificationStatus.coding.code'
+		dataType: string
+		lineageTag: 6da7acdf-87e1-4619-b791-9d7b084917f8
+		summarizeBy: none
+		sourceColumn: verificationStatus.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.code'
+		dataType: string
+		lineageTag: eb163d50-5669-4a6f-9121-805b6c9d787c
+		summarizeBy: none
+		sourceColumn: category.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.display'
+		dataType: string
+		lineageTag: 19573b25-136e-408a-8bd2-25bc33708464
+		summarizeBy: none
+		sourceColumn: category.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column onsetDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cb51dc85-295f-448d-8384-7c4ad1ff55db
+		summarizeBy: none
+		sourceColumn: onsetDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column abatementDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4818e6c0-03da-4682-9817-e1ee23d169de
+		summarizeBy: none
+		sourceColumn: abatementDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column recordedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ceb63d1a-d610-4aab-8a2b-c34281fe5f09
+		summarizeBy: none
+		sourceColumn: recordedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.system'
+		dataType: string
+		lineageTag: 431fb668-7d62-4ceb-89f7-5a74f3ddd466
+		summarizeBy: none
+		sourceColumn: code.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.system'
+		dataType: string
+		lineageTag: cbba2761-c008-438b-9387-ac9726892028
+		summarizeBy: none
+		sourceColumn: category.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'clinicalStatus.coding.system'
+		dataType: string
+		lineageTag: 2adda5ee-afc4-4de8-bed4-0faa5a1209cb
+		summarizeBy: none
+		sourceColumn: clinicalStatus.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'verificationStatus.coding.system'
+		dataType: string
+		lineageTag: b248b104-5ec3-4537-9b77-b8a34733eaf2
+		summarizeBy: none
+		sourceColumn: verificationStatus.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'subject.reference'
+		dataType: string
+		lineageTag: d7cf00b1-6f63-4228-b4d6-de26b5e41fe1
+		summarizeBy: none
+		sourceColumn: subject.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'encounter.reference'
+		dataType: string
+		lineageTag: e33a783d-9b8c-4fd8-9aca-112bd40d1874
+		summarizeBy: none
+		sourceColumn: encounter.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Condition_FHIR = m
+		mode: import
+		source = ```
+				let
+				    // Step 1: Connect with the FHIR connector and open the Condition resources.
+				    // The connector follows the paging links itself, so every condition loads.
+				    Source = Fhir.Contents("http://localhost:8081/fhir", "Condition?"),
+				    ConditionTable = Source{[Name = "Condition"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // Pulls the resource ID off the end of a reference like "Patient/123"
+				    ReferenceID = (reference as any) as nullable text =>
+				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields Synthea fills in that the report uses.
+				    // Dropping everything else up front keeps later steps fast.
+				    SelectedFields = Table.SelectColumns(
+				        ConditionTable,
+				        {"id", "clinicalStatus", "verificationStatus", "category", "code",
+				         "subject", "encounter", "onsetDateTime", "abatementDateTime", "recordedDate"},
+				        MissingField.UseNull
+				    ),
+				
+				    // Step 3: Reduce each coded element to its first Coding, so the table
+				    // stays at one row per condition. The field profile shows none of
+				    // these repeat in Synthea data, so nothing is lost.
+				    PickedCodings = Table.TransformColumns(SelectedFields, {
+				        {"clinicalStatus", FirstCoding},
+				        {"verificationStatus", FirstCoding},
+				        {"category", FirstCoding},
+				        {"code", FirstCoding}
+				    }),
+				
+				    // Step 4: Expand clinical status (e.g. active, resolved) and
+				    // verification status (e.g. confirmed)
+				     ExpandedClinicalStatus = Table.ExpandRecordColumn(PickedCodings, "clinicalStatus", {"system", "code"}, {"clinicalStatus.coding.system", "clinicalStatus.coding.code"}),
+				    ExpandedVerificationStatus = Table.ExpandRecordColumn(ExpandedClinicalStatus, "verificationStatus", {"system", "code"}, {"verificationStatus.coding.system", "verificationStatus.coding.code"}),
+				    
+				    // Step 5: Expand the category (e.g. encounter diagnosis, problem list item)
+				    ExpandedCategory = Table.ExpandRecordColumn(ExpandedVerificationStatus, "category", {"system", "code", "display"}, {"category.coding.system", "category.coding.code", "category.coding.display"}),
+				
+				    // Step 6: Expand the condition code itself (SNOMED CT in Synthea)
+				    ExpandedCode = Table.ExpandRecordColumn(ExpandedCategory, "code", {"system", "code", "display"}, {"code.coding.system", "code.coding.code", "code.coding.display"}),
+				
+				    // Step 7: Expand the patient and encounter references and pull out their
+				    // IDs, which match the id columns in the Patient and Encounter queries
+				    ExpandedSubject = Table.ExpandRecordColumn(ExpandedCode, "subject", {"reference"}, {"subject.reference"}),
+				    ExpandedEncounter = Table.ExpandRecordColumn(ExpandedSubject, "encounter", {"reference"}, {"encounter.reference"}),
+				    AddedPatientID = Table.AddColumn(ExpandedEncounter, "PatientID", each ReferenceID([subject.reference]), type nullable text),
+				    AddedEncounterID = Table.AddColumn(AddedPatientID, "EncounterID", each ReferenceID([encounter.reference]), type nullable text),
+				
+				    // Step 8: Parse the dates. abatementDateTime (when the condition ended)
+				    // is only present for resolved conditions.
+				    ParsedDates = Table.TransformColumns(AddedEncounterID, {
+				        {"onsetDateTime", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone},
+				        {"abatementDateTime", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone},
+				        {"recordedDate", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
+				    }),
+				
+				    // Step 9: Set column types and put the columns in a readable order
+				    ChangedTypes = Table.TransformColumnTypes(ParsedDates, {
+				        {"id", type text},
+				        {"clinicalStatus.coding.code", type text}, {"verificationStatus.coding.code", type text},
+				        {"category.coding.system", type text}, {"category.coding.code", type text}, {"category.coding.display", type text},
+				        {"code.coding.system", type text}, {"code.coding.code", type text}, {"code.coding.display", type text},
+				        {"clinicalStatus.coding.system", type text}, {"verificationStatus.coding.system", type text},
+				        {"subject.reference", type text}, {"encounter.reference", type text}
+				    }),
+				    ReorderedColumns = Table.ReorderColumns(ChangedTypes, {
+				        "id", "PatientID", "EncounterID",
+				        "code.coding.code", "code.coding.display",
+				        "clinicalStatus.coding.code", "verificationStatus.coding.code",
+				        "category.coding.code", "category.coding.display",
+				        "onsetDateTime", "abatementDateTime", "recordedDate",
+				        "code.coding.system", "category.coding.system",
+				        "clinicalStatus.coding.system", "verificationStatus.coding.system",
+				        "subject.reference", "encounter.reference"
+				    })
+				in
+				    ReorderedColumns
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
