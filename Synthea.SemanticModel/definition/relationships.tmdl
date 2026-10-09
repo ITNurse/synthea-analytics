@@ -1,20 +1,29 @@
 relationship 07c1faaa-2865-58e9-f216-3da69fa313da
-	fromColumn: Condition_FHIR.PatientID
-	toColumn: Patient_FHIR.id
+	fromColumn: Condition.PatientID
+	toColumn: Patient.id
 
 relationship ec5db5de-e66e-2f4e-f3b3-10415dd4cb6c
-	fromColumn: Immunization_FHIR.PatientID
-	toColumn: Patient_FHIR.id
+	fromColumn: Immunization.PatientID
+	toColumn: Patient.id
 
 relationship 2bdc33c1-9db0-542c-8ddf-04319c90d425
-	fromColumn: Observation_FHIR.PatientID
-	toColumn: Patient_FHIR.id
+	fromColumn: Observation.PatientID
+	toColumn: Patient.id
 
 relationship b6a28580-b8df-6485-42ca-9b47249b7848
-	fromColumn: ObservationComponent_FHIR.ObservationID
-	toColumn: Observation_FHIR.id
+	fromColumn: ObservationComponent.ObservationID
+	toColumn: Observation.id
 
 relationship bf978c4e-fd53-3811-b394-d33c751c6d3a
-	fromColumn: Encounter_FHIR.PatientID
-	toColumn: Patient_FHIR.id
+	fromColumn: Encounter.PatientID
+	toColumn: Patient.id
+
+relationship AutoDetected_f7cf86f7-1b26-4174-aefd-cf6e3f636b7f
+	isActive: false
+	fromColumn: DiagnosticReport.EncounterID
+	toColumn: Encounter.id
+
+relationship AutoDetected_3437bd54-1c70-43da-9203-a2d0606ec05b
+	fromColumn: DiagnosticReport.PatientID
+	toColumn: Patient.id
 

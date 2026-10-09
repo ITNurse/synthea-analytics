@@ -1,4 +1,4 @@
-table Patient_FHIR
+table Patient
 	lineageTag: 979a8569-3f45-4af9-b98e-c8d7f9a890b7
 
 	column id
@@ -243,7 +243,7 @@ table Patient_FHIR
 
 		annotation SummarizationSetBy = Automatic
 
-	partition Patient_FHIR = m
+	partition Patient = m
 		mode: import
 		source = ```
 				let

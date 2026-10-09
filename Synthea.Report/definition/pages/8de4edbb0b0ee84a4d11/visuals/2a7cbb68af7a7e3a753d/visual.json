@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.family"
@@ -34,7 +34,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.given"
@@ -48,7 +48,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ObservationComponent_FHIR"
+                      "Entity": "ObservationComponent"
                     }
                   },
                   "Property": "ObservationID"
@@ -62,7 +62,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ObservationComponent_FHIR"
+                      "Entity": "ObservationComponent"
                     }
                   },
                   "Property": "component.code.coding.code"
@@ -76,7 +76,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ObservationComponent_FHIR"
+                      "Entity": "ObservationComponent"
                     }
                   },
                   "Property": "component.code.coding.display"
@@ -90,7 +90,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ObservationComponent_FHIR"
+                      "Entity": "ObservationComponent"
                     }
                   },
                   "Property": "component.valueQuantity.value"
@@ -104,7 +104,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ObservationComponent_FHIR"
+                      "Entity": "ObservationComponent"
                     }
                   },
                   "Property": "component.valueQuantity.code"
@@ -118,7 +118,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ObservationComponent_FHIR"
+                      "Entity": "ObservationComponent"
                     }
                   },
                   "Property": "component.valueString"
@@ -132,7 +132,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "ObservationComponent_FHIR"
+                      "Entity": "ObservationComponent"
                     }
                   },
                   "Property": "component.valueCodeableConcept.coding.display"
@@ -151,7 +151,7 @@
               "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "ObservationComponent_FHIR"
+                    "Entity": "ObservationComponent"
                   }
                 },
                 "Property": "component.valueQuantity.code"

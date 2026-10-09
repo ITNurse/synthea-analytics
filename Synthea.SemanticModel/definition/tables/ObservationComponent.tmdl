@@ -1,4 +1,4 @@
-table ObservationComponent_FHIR
+table ObservationComponent
 	lineageTag: 400e6a40-4067-41ec-9c5f-1739a0d533ca
 
 	column ObservationID
@@ -99,7 +99,7 @@ table ObservationComponent_FHIR
 
 		annotation SummarizationSetBy = Automatic
 
-	partition ObservationComponent_FHIR = m
+	partition ObservationComponent = m
 		mode: import
 		source = ```
 				let

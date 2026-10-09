@@ -1,4 +1,4 @@
-table Immunization_FHIR
+table Immunization
 	lineageTag: 7aed7d60-233d-4e1a-b083-100fa53c44a8
 
 	column id
@@ -107,7 +107,7 @@ table Immunization_FHIR
 
 		annotation SummarizationSetBy = Automatic
 
-	partition Immunization_FHIR = m
+	partition Immunization = m
 		mode: import
 		source = ```
 				let

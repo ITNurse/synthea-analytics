@@ -1,4 +1,4 @@
-table Condition_FHIR
+table Condition
 	lineageTag: 74a104c7-4247-4189-96b9-f6e9f41e01ea
 
 	column id
@@ -148,7 +148,7 @@ table Condition_FHIR
 
 		annotation SummarizationSetBy = Automatic
 
-	partition Condition_FHIR = m
+	partition Condition = m
 		mode: import
 		source = ```
 				let

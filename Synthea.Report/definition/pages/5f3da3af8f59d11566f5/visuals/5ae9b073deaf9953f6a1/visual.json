@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "7e874b1ba22976b9b450",
+  "name": "5ae9b073deaf9953f6a1",
   "position": {
-    "x": 9.5246584633271976,
+    "x": 9.8324022346368718,
     "y": 0,
     "z": 0,
-    "height": 313.52000775118688,
-    "width": 1270.7481833155703,
+    "height": 345.02793296089391,
+    "width": 1270.1675977653633,
     "tabOrder": 0
   },
   "visual": {
@@ -26,7 +26,7 @@
                   "Property": "name.family"
                 }
               },
-              "queryRef": "Patient_FHIR.name.family",
+              "queryRef": "Patient.name.family",
               "nativeQueryRef": "name.family"
             },
             {
@@ -40,7 +40,7 @@
                   "Property": "name.given"
                 }
               },
-              "queryRef": "Patient_FHIR.name.given",
+              "queryRef": "Patient.name.given",
               "nativeQueryRef": "name.given"
             },
             {
@@ -48,27 +48,27 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Observation"
+                      "Entity": "DiagnosticReport"
                     }
                   },
-                  "Property": "effectiveDateTime"
+                  "Property": "performer.display"
                 }
               },
-              "queryRef": "Observation_FHIR.effectiveDateTime",
-              "nativeQueryRef": "effectiveDateTime"
+              "queryRef": "DiagnosticReport.performer.display",
+              "nativeQueryRef": "performer.display"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Observation"
+                      "Entity": "DiagnosticReport"
                     }
                   },
                   "Property": "code.coding.code"
                 }
               },
-              "queryRef": "Observation_FHIR.code.coding.code",
+              "queryRef": "DiagnosticReport.code.coding.code",
               "nativeQueryRef": "code.coding.code"
             },
             {
@@ -76,13 +76,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Observation"
+                      "Entity": "DiagnosticReport"
                     }
                   },
                   "Property": "code.coding.display"
                 }
               },
-              "queryRef": "Observation_FHIR.code.coding.display",
+              "queryRef": "DiagnosticReport.code.coding.display",
               "nativeQueryRef": "code.coding.display"
             },
             {
@@ -90,76 +90,45 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Observation"
+                      "Entity": "DiagnosticReport"
                     }
                   },
-                  "Property": "valueQuantity.value"
+                  "Property": "effectiveDateTime"
                 }
               },
-              "queryRef": "Sum(Observation_FHIR.valueQuantity.value)",
-              "nativeQueryRef": "valueQuantity.value"
+              "queryRef": "DiagnosticReport.effectiveDateTime",
+              "nativeQueryRef": "effectiveDateTime"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Observation"
+                      "Entity": "DiagnosticReport"
                     }
                   },
-                  "Property": "valueQuantity.unit"
+                  "Property": "ResultCount"
                 }
               },
-              "queryRef": "Observation_FHIR.valueQuantity.unit",
-              "nativeQueryRef": "valueQuantity.unit"
+              "queryRef": "Sum(DiagnosticReport.ResultCount)",
+              "nativeQueryRef": "ResultCount"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Observation"
-                    }
-                  },
-                  "Property": "valueCodeableConcept.coding.display"
-                }
-              },
-              "queryRef": "Observation_FHIR.valueCodeableConcept.coding.display",
-              "nativeQueryRef": "valueCodeableConcept.coding.display"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Observation"
+                      "Entity": "DiagnosticReport"
                     }
                   },
                   "Property": "status"
                 }
               },
-              "queryRef": "Observation_FHIR.status",
+              "queryRef": "DiagnosticReport.status",
               "nativeQueryRef": "status"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Observation"
-                  }
-                },
-                "Property": "code.coding.display"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ]
       }
     },
     "objects": {
@@ -169,13 +138,13 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "739.9937536584446D"
+                  "Value": "233.4972184398173D"
                 }
               }
             }
           },
           "selector": {
-            "metadata": "Observation_FHIR.code.coding.display"
+            "metadata": "DiagnosticReport.performer.display"
           }
         }
       ],
@@ -199,7 +168,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Observation'"
+                  "Value": "'Diagnostic Report'"
                 }
               }
             }

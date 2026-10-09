@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.family"
@@ -34,7 +34,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.given"
@@ -48,7 +48,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "IsDeceased"
@@ -62,7 +62,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "birthDate"
@@ -76,7 +76,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "Age"
@@ -90,7 +90,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "maritalStatus.coding.code"
@@ -104,7 +104,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "gender"
@@ -118,7 +118,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "communication.language.coding.code"
@@ -132,7 +132,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "address.state"
@@ -177,7 +177,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient_FHIR"
+                "Entity": "Patient"
               }
             },
             "Property": "name.family"
@@ -191,7 +191,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient_FHIR"
+                "Entity": "Patient"
               }
             },
             "Property": "name.given"
@@ -205,7 +205,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient_FHIR"
+                "Entity": "Patient"
               }
             },
             "Property": "IsDeceased"
@@ -219,7 +219,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient_FHIR"
+                "Entity": "Patient"
               }
             },
             "Property": "birthDate"

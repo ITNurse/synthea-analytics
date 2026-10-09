@@ -1,0 +1,302 @@
+table DiagnosticReport
+	lineageTag: 1d448531-2329-4d6d-a9f1-7c54d02b2c0f
+
+	column id
+		dataType: string
+		lineageTag: e275cd7b-e26a-49d3-89d1-ac54543bbd17
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: string
+		lineageTag: 36f15b45-870c-490f-a899-43691139665f
+		summarizeBy: none
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EncounterID
+		dataType: string
+		lineageTag: 7afd3a79-ecf0-46c5-b31c-32d56bff164f
+		summarizeBy: none
+		sourceColumn: EncounterID
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 900269bd-3f2e-43d6-8c16-7cbfe225db90
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.system'
+		dataType: string
+		lineageTag: 8df140bc-b8e3-43bb-b40a-0c5a7143f63b
+		summarizeBy: none
+		sourceColumn: category.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.code'
+		dataType: string
+		lineageTag: e8455970-07fb-416d-9636-a025a0ab0ee7
+		summarizeBy: none
+		sourceColumn: category.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'category.coding.display'
+		dataType: string
+		lineageTag: 39514ab7-a4b9-478f-9d13-be91f2b80dc4
+		summarizeBy: none
+		sourceColumn: category.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.system'
+		dataType: string
+		lineageTag: 34310f62-4d87-4cd7-b2f8-c483daeb9742
+		summarizeBy: none
+		sourceColumn: code.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.code'
+		dataType: string
+		lineageTag: 9ae5b163-c65c-443e-a0c2-1ac77492cc5a
+		summarizeBy: none
+		sourceColumn: code.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'code.coding.display'
+		dataType: string
+		lineageTag: d7dda243-82df-40b6-a212-660d34f71872
+		summarizeBy: none
+		sourceColumn: code.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column effectiveDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4f2d6d03-98fb-4e81-a7eb-a8210c2394a9
+		summarizeBy: none
+		sourceColumn: effectiveDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column issued
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f3ea6961-1fcb-4455-90ae-0de42cd5c6fe
+		summarizeBy: none
+		sourceColumn: issued
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'performer.display'
+		dataType: string
+		lineageTag: 0f790023-420d-4642-a6ab-db0223ad6be8
+		summarizeBy: none
+		sourceColumn: performer.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResultCount
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b5b0479-153d-43ea-b642-cbd44f2f72af
+		summarizeBy: sum
+		sourceColumn: ResultCount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'presentedForm.contentType'
+		dataType: string
+		lineageTag: 10a51958-7a5c-4b29-be3a-85251be5b6d9
+		summarizeBy: none
+		sourceColumn: presentedForm.contentType
+
+		annotation SummarizationSetBy = Automatic
+
+	column PresentedFormText
+		dataType: string
+		lineageTag: 071186dc-5878-447f-afb4-cc600d961e0e
+		summarizeBy: none
+		sourceColumn: PresentedFormText
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'performer.reference'
+		dataType: string
+		lineageTag: 6f188343-1fe5-4e76-bd07-9d0fbb22d40d
+		summarizeBy: none
+		sourceColumn: performer.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'subject.reference'
+		dataType: string
+		lineageTag: 316c7dfa-081b-4225-9a16-024d65cef345
+		summarizeBy: none
+		sourceColumn: subject.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'encounter.reference'
+		dataType: string
+		lineageTag: 161c884a-e582-49be-bbcf-60488628e426
+		summarizeBy: none
+		sourceColumn: encounter.reference
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DiagnosticReport = m
+		mode: import
+		source = ```
+				let
+				    // Step 1: Connect with the FHIR connector and open the DiagnosticReport resources.
+				    // The connector follows the paging links itself, so every report loads.
+				    Source = Fhir.Contents("http://localhost:8081/fhir", "DiagnosticReport?"),
+				    DiagnosticReportTable = Source{[Name = "DiagnosticReport"]}[Data],
+				
+				    // ---------------------------------------------------------------
+				    // Helpers. The FHIR connector returns repeating elements as nested
+				    // tables (the web connector returned lists), so these accept either.
+				    // ---------------------------------------------------------------
+				
+				    // Turns a repeating element (table, list, or single record) into a list
+				    AsList = (value as any) as nullable list =>
+				        if value = null then null
+				        else if value is table then Table.ToRecords(value)
+				        else if value is list then value
+				        else {value},
+				
+				    // Reads a field from a record, returning null instead of an error if
+				    // the record or field is missing
+				    GetField = (rec as any, name as text) as any =>
+				        if rec = null or not (rec is record) then null else Record.FieldOrDefault(rec, name, null),
+				
+				    // Returns the first entry of a repeating element, or null if empty
+				    FirstItem = (value as any) as nullable record =>
+				        let items = AsList(value)
+				        in if items = null or List.IsEmpty(items) then null else items{0},
+				
+				    // Returns the first Coding inside a CodeableConcept, which is where
+				    // FHIR keeps the system, code and display
+				    FirstCoding = (concept as any) as nullable record =>
+				        FirstItem(GetField(FirstItem(concept), "coding")),
+				
+				    // Pulls the resource ID off the end of a reference like "Patient/123"
+				    ReferenceID = (reference as any) as nullable text =>
+				        if reference = null then null else Text.AfterDelimiter(reference, "/", {0, RelativePosition.FromEnd}),
+				    
+				    // Reads one type from a FHIR choice element (value[x], deceased[x] and
+				    // so on). The FHIR connector puts all of the options in one column named
+				    // after the element, so this picks out the type we want. Matching ignores
+				    // capitalization, since primitive type names are lowercase in FHIR
+				    // (dateTime, boolean, string) and complex ones are capitalized (Quantity).
+				    ChoiceField = (choice as any, base as text, typeName as text) as any =>
+				        if choice = null or not (choice is record) then null
+				        else
+				            let
+				                wanted = {Text.Lower(base & typeName), Text.Lower(typeName)},
+				                matches = List.Select(Record.FieldNames(choice), each List.Contains(wanted, Text.Lower(_)))
+				            in
+				                if List.IsEmpty(matches) then null else Record.Field(choice, matches{0}),
+				
+				    // ---------------------------------------------------------------
+				    // Transformation steps
+				    // ---------------------------------------------------------------
+				
+				    // Step 2: Keep only the fields Synthea fills in that the report uses
+				    SelectedRaw = Table.SelectColumns(
+				        DiagnosticReportTable,
+				        {"id", "status", "category", "code", "subject", "encounter", "effective",
+				         "issued", "performer", "result", "presentedForm"},
+				        MissingField.UseNull
+				    ),
+				    AddedEffective = Table.AddColumn(SelectedRaw, "effectiveDateTime", each ChoiceField([effective], "effective", "DateTime")),
+				    SelectedFields = Table.RemoveColumns(AddedEffective, {"effective"}),
+				
+				    // Step 3: Count the results (references to the Observations in a lab
+				    // panel), then drop them. The references themselves are in the
+				    // DiagnosticReportResult query, one row per result.
+				    AddedResultCount = Table.AddColumn(SelectedFields, "ResultCount", each
+				        let items = AsList([result]) in if items = null then 0 else List.Count(items),
+				        Int64.Type
+				    ),
+				    RemovedResult = Table.RemoveColumns(AddedResultCount, {"result"}),
+				
+				    // Step 4: Reduce the remaining elements to a single entry, so the table
+				    // stays at one row per report. Category and code can have two Codings
+				    // (both LOINC, on clinical notes), so the first is taken.
+				    PickedElements = Table.TransformColumns(RemovedResult, {
+				        {"category", FirstCoding},
+				        {"code", FirstCoding},
+				        {"performer", FirstItem},
+				        {"presentedForm", FirstItem}
+				    }),
+				
+				    // Step 5: Expand the category (e.g. laboratory, or a clinical note type)
+				    // and the report code (LOINC in Synthea)
+				    ExpandedCategory = Table.ExpandRecordColumn(PickedElements, "category", {"system", "code", "display"}, {"category.coding.system", "category.coding.code", "category.coding.display"}),
+				    ExpandedCode = Table.ExpandRecordColumn(ExpandedCategory, "code", {"system", "code", "display"}, {"code.coding.system", "code.coding.code", "code.coding.display"}),
+				
+				    // Step 6: Expand the patient and encounter references and pull out their
+				    // IDs, which match the id columns in the Patient and Encounter queries
+				    ExpandedSubject = Table.ExpandRecordColumn(ExpandedCode, "subject", {"reference"}, {"subject.reference"}),
+				    ExpandedEncounter = Table.ExpandRecordColumn(ExpandedSubject, "encounter", {"reference"}, {"encounter.reference"}),
+				    AddedPatientID = Table.AddColumn(ExpandedEncounter, "PatientID", each ReferenceID([subject.reference]), type nullable text),
+				    AddedEncounterID = Table.AddColumn(AddedPatientID, "EncounterID", each ReferenceID([encounter.reference]), type nullable text),
+				
+				    // Step 7: Expand who produced the report (an organization in Synthea).
+				    // The reference is kept for joining to an Organization table later.
+				    ExpandedPerformer = Table.ExpandRecordColumn(AddedEncounterID, "performer", {"reference", "display"}, {"performer.reference", "performer.display"}),
+				
+				    // Step 8: Clinical notes carry their text in presentedForm, encoded as
+				    // base64. Decode it into readable text and drop the encoded copy.
+				    ExpandedPresentedForm = Table.ExpandRecordColumn(ExpandedPerformer, "presentedForm", {"contentType", "data"}, {"presentedForm.contentType", "presentedForm.data"}),
+				    AddedPresentedFormText = Table.AddColumn(ExpandedPresentedForm, "PresentedFormText", each
+				        if [presentedForm.data] = null then null
+				        else try Text.FromBinary(Binary.FromText([presentedForm.data], BinaryEncoding.Base64), TextEncoding.Utf8) otherwise null,
+				        type nullable text
+				    ),
+				    RemovedEncodedData = Table.RemoveColumns(AddedPresentedFormText, {"presentedForm.data"}),
+				
+				    // Step 9: Parse the dates (when the report applies, and when it was released)
+				    ParsedDates = Table.TransformColumns(RemovedEncodedData, {
+				        {"effectiveDateTime", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone},
+				        {"issued", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
+				    }),
+				
+				    // Step 10: Set column types and put the columns in a readable order
+				    ChangedTypes = Table.TransformColumnTypes(ParsedDates, {
+				        {"id", type text}, {"status", type text},
+				        {"category.coding.system", type text}, {"category.coding.code", type text}, {"category.coding.display", type text},
+				        {"code.coding.system", type text}, {"code.coding.code", type text}, {"code.coding.display", type text},
+				        {"subject.reference", type text}, {"encounter.reference", type text},
+				        {"performer.reference", type text}, {"performer.display", type text},
+				        {"presentedForm.contentType", type text}
+				    }),
+				    ReorderedColumns = Table.ReorderColumns(ChangedTypes, {
+				        "id", "PatientID", "EncounterID", "status",
+				        "category.coding.system", "category.coding.code", "category.coding.display",
+				        "code.coding.system", "code.coding.code", "code.coding.display",
+				        "effectiveDateTime", "issued", "performer.display", "ResultCount",
+				        "presentedForm.contentType", "PresentedFormText",
+				        "performer.reference", "subject.reference", "encounter.reference"
+				    })
+				in
+				    ReorderedColumns
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

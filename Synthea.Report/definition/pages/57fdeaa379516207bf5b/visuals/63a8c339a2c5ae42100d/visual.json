@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.family"
@@ -34,7 +34,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.given"
@@ -48,7 +48,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Immunization_FHIR"
+                      "Entity": "Immunization"
                     }
                   },
                   "Property": "occurrenceDateTime"
@@ -62,7 +62,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Immunization_FHIR"
+                      "Entity": "Immunization"
                     }
                   },
                   "Property": "vaccineCode.coding.display"
@@ -76,7 +76,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Immunization_FHIR"
+                      "Entity": "Immunization"
                     }
                   },
                   "Property": "location.display"
@@ -90,7 +90,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Immunization_FHIR"
+                      "Entity": "Immunization"
                     }
                   },
                   "Property": "encounter.reference"
@@ -104,7 +104,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Immunization_FHIR"
+                      "Entity": "Immunization"
                     }
                   },
                   "Property": "status"
@@ -118,7 +118,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Immunization_FHIR"
+                      "Entity": "Immunization"
                     }
                   },
                   "Property": "primarySource"
@@ -141,7 +141,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient_FHIR"
+                "Entity": "Patient"
               }
             },
             "Property": "name.family"
@@ -155,7 +155,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Patient_FHIR"
+                "Entity": "Patient"
               }
             },
             "Property": "name.given"
@@ -169,7 +169,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Immunization_FHIR"
+                "Entity": "Immunization"
               }
             },
             "Property": "vaccineCode.coding.display"
@@ -183,7 +183,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Immunization_FHIR"
+                "Entity": "Immunization"
               }
             },
             "Property": "location.display"
@@ -197,7 +197,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Immunization_FHIR"
+                "Entity": "Immunization"
               }
             },
             "Property": "encounter.reference"
@@ -211,7 +211,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Immunization_FHIR"
+                "Entity": "Immunization"
               }
             },
             "Property": "status"
@@ -225,7 +225,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Immunization_FHIR"
+                "Entity": "Immunization"
               }
             },
             "Property": "primarySource"
@@ -239,7 +239,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "Immunization_FHIR"
+                "Entity": "Immunization"
               }
             },
             "Property": "occurrenceDateTime"

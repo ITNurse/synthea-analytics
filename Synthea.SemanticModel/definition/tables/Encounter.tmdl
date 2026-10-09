@@ -1,4 +1,4 @@
-table Encounter_FHIR
+table Encounter
 	lineageTag: 11da1b49-bd5e-424d-89f9-d91a720be2e5
 
 	column id
@@ -229,7 +229,7 @@ table Encounter_FHIR
 
 		annotation SummarizationSetBy = Automatic
 
-	partition Encounter_FHIR = m
+	partition Encounter = m
 		mode: import
 		source = ```
 				let

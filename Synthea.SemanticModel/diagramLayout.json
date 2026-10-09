@@ -10,24 +10,10 @@
       "nodes": [
         {
           "location": {
-            "x": 1315.9999542236328,
-            "y": 58.43994140625
-          },
-          "nodeIndex": "ICD-10-Map",
-          "nodeLineageTag": "61613e57-7f5c-4092-ac8f-1f3fa6adaf5a",
-          "size": {
-            "height": 290,
-            "width": 234
-          },
-          "zIndex": 6
-        },
-        {
-          "location": {
             "x": 702,
             "y": 22.26318359375
           },
-          "nodeIndex": "Encounter_FHIR",
-          "nodeLineageTag": "11da1b49-bd5e-424d-89f9-d91a720be2e5",
+          "nodeIndex": "Encounter",
           "size": {
             "height": 455,
             "width": 234
@@ -36,24 +22,22 @@
         },
         {
           "location": {
-            "x": 81,
-            "y": 0
+            "x": 488,
+            "y": 576
           },
-          "nodeIndex": "Condition_FHIR",
-          "nodeLineageTag": "74a104c7-4247-4189-96b9-f6e9f41e01ea",
+          "nodeIndex": "Patient",
           "size": {
             "height": 300,
-            "width": 234
+            "width": 236
           },
           "zIndex": 0
         },
         {
           "location": {
-            "x": 368,
+            "x": 81,
             "y": 0
           },
-          "nodeIndex": "Immunization_FHIR",
-          "nodeLineageTag": "7aed7d60-233d-4e1a-b083-100fa53c44a8",
+          "nodeIndex": "Condition",
           "size": {
             "height": 300,
             "width": 234
@@ -65,8 +49,7 @@
             "x": 900,
             "y": 576
           },
-          "nodeIndex": "Observation_FHIR",
-          "nodeLineageTag": "6768dfea-9aaa-44db-93b9-bca81799c442",
+          "nodeIndex": "Observation",
           "size": {
             "height": 300,
             "width": 234
@@ -78,8 +61,7 @@
             "x": 1242,
             "y": 577.8427734375
           },
-          "nodeIndex": "ObservationComponent_FHIR",
-          "nodeLineageTag": "400e6a40-4067-41ec-9c5f-1739a0d533ca",
+          "nodeIndex": "ObservationComponent",
           "size": {
             "height": 300,
             "width": 234
@@ -88,14 +70,26 @@
         },
         {
           "location": {
-            "x": 488,
-            "y": 576
+            "x": 368,
+            "y": 0
           },
-          "nodeIndex": "Patient_FHIR",
-          "nodeLineageTag": "979a8569-3f45-4af9-b98e-c8d7f9a890b7",
+          "nodeIndex": "Immunization",
           "size": {
             "height": 300,
-            "width": 236
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1068,
+            "y": 63.92138671875
+          },
+          "nodeIndex": "DiagnosticReport",
+          "nodeLineageTag": "1d448531-2329-4d6d-a9f1-7c54d02b2c0f",
+          "size": {
+            "height": 300,
+            "width": 234
           },
           "zIndex": 0
         }

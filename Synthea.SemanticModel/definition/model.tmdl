@@ -9,17 +9,17 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["ICD-10-Map","Encounter_FHIR","Patient_FHIR","Condition_FHIR","Observation_FHIR","ObservationComponent_FHIR","Immunization_FHIR"]
+annotation PBI_QueryOrder = ["Encounter","Patient","Condition","Observation","ObservationComponent","Immunization","DiagnosticReport"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table ICD-10-Map
-ref table Encounter_FHIR
-ref table Patient_FHIR
-ref table Condition_FHIR
-ref table Observation_FHIR
-ref table ObservationComponent_FHIR
-ref table Immunization_FHIR
+ref table Encounter
+ref table Patient
+ref table Condition
+ref table Observation
+ref table ObservationComponent
+ref table Immunization
+ref table DiagnosticReport
 
 ref cultureInfo en-US
 

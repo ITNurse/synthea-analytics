@@ -20,7 +20,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.family"
@@ -34,7 +34,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient_FHIR"
+                      "Entity": "Patient"
                     }
                   },
                   "Property": "name.given"
@@ -48,7 +48,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Condition_FHIR"
+                      "Entity": "Condition"
                     }
                   },
                   "Property": "category.coding.code"
@@ -62,7 +62,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Condition_FHIR"
+                      "Entity": "Condition"
                     }
                   },
                   "Property": "clinicalStatus.coding.code"
@@ -76,7 +76,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Condition_FHIR"
+                      "Entity": "Condition"
                     }
                   },
                   "Property": "code.coding.display"
@@ -90,7 +90,7 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Condition_FHIR"
+                      "Entity": "Condition"
                     }
                   },
                   "Property": "verificationStatus.coding.code"
