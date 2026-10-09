@@ -117,6 +117,54 @@ table Procedure
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'reasonCode.coding.system'
+		dataType: string
+		lineageTag: eada6f52-46cf-4a7b-843a-efa030f7870b
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.system
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.code'
+		dataType: string
+		lineageTag: d187b0ea-6c1e-4525-aa2d-1c7e93a0af2c
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonCode.coding.display'
+		dataType: string
+		lineageTag: 67e61a50-1da6-4f8a-9301-96692ae21710
+		summarizeBy: none
+		sourceColumn: reasonCode.coding.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReasonConditionID
+		dataType: string
+		lineageTag: 640c7e56-5dc3-4e06-b18c-367a3b29ff6c
+		summarizeBy: none
+		sourceColumn: ReasonConditionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonReference.display'
+		dataType: string
+		lineageTag: 8c4f9b2e-76fa-4915-904e-7f7e7e59cef0
+		summarizeBy: none
+		sourceColumn: reasonReference.display
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'reasonReference.reference'
+		dataType: string
+		lineageTag: 87f724cc-d7d9-4799-b185-3da7ac1e304d
+		summarizeBy: none
+		sourceColumn: reasonReference.reference
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Procedure = m
 		mode: import
 		source =
@@ -180,18 +228,23 @@ table Procedure
 				    // column, so pull the Period out of it.
 				    SelectedRaw = Table.SelectColumns(
 				        ProcedureTable,
-				        {"id", "status", "code", "subject", "encounter", "performed", "location"},
+				        {"id", "status", "code", "subject", "encounter", "performed", "location", "reasonCode", "reasonReference"},
 				        MissingField.UseNull
 				    ),
 				    AddedPerformedPeriod = Table.AddColumn(SelectedRaw, "performedPeriod", each ChoiceField([performed], "performed", "Period")),
 				    SelectedFields = Table.RemoveColumns(AddedPerformedPeriod, {"performed"}),
 				
-				    // Step 3: Reduce the procedure code to its first Coding, so the table
-				    // stays at one row per procedure
-				    PickedCodings = Table.TransformColumns(SelectedFields, {{"code", FirstCoding}}),
+				    // Step 3: Reduce each coded or repeating element to its first entry, so
+				    // the table stays at one row per procedure. The field profile shows none
+				    // of these repeat in Synthea data, so nothing is lost.
+				    PickedElements = Table.TransformColumns(SelectedFields, {
+				        {"code", FirstCoding},
+				        {"reasonCode", FirstCoding},
+				        {"reasonReference", FirstItem}
+				    }),
 				
 				    // Step 4: Expand the procedure code (SNOMED CT in Synthea)
-				    ExpandedCode = Table.ExpandRecordColumn(PickedCodings, "code", {"system", "code", "display"}, {"code.coding.system", "code.coding.code", "code.coding.display"}),
+				    ExpandedCode = Table.ExpandRecordColumn(PickedElements, "code", {"system", "code", "display"}, {"code.coding.system", "code.coding.code", "code.coding.display"}),
 				
 				    // Step 5: Expand the patient and encounter references and pull out their
 				    // IDs, which match the id columns in the Patient and Encounter queries
@@ -204,8 +257,23 @@ table Procedure
 				    // joining to a Location table later.
 				    ExpandedLocation = Table.ExpandRecordColumn(AddedEncounterID, "location", {"reference", "display"}, {"location.reference", "location.display"}),
 				
-				    // Step 7: Expand when the procedure started and ended, and work out its length
-				    ExpandedPeriod = Table.ExpandRecordColumn(ExpandedLocation, "performedPeriod", {"start", "end"}, {"performedPeriod.start", "performedPeriod.end"}),
+				    // Step 7: Expand why the procedure was done. Synthea records the reason
+				    // in one of two ways: as a reference to a Condition (reasonReference), or
+				    // as a code with no Condition behind it (reasonCode). Most procedures
+				    // have neither.
+				    ExpandedReasonCode = Table.ExpandRecordColumn(ExpandedLocation, "reasonCode", {"system", "code", "display"}, {"reasonCode.coding.system", "reasonCode.coding.code", "reasonCode.coding.display"}),
+				    ExpandedReasonReference = Table.ExpandRecordColumn(ExpandedReasonCode, "reasonReference", {"reference", "display"}, {"reasonReference.reference", "reasonReference.display"}),
+				
+				    // The Condition's ID, which matches the id column in the Condition query.
+				    // Only filled in when the reason points to a Condition.
+				    AddedReasonConditionID = Table.AddColumn(ExpandedReasonReference, "ReasonConditionID", each
+				        if [reasonReference.reference] <> null and Text.StartsWith([reasonReference.reference], "Condition/")
+				        then ReferenceID([reasonReference.reference]) else null,
+				        type nullable text
+				    ),
+				
+				    // Step 8: Expand when the procedure started and ended, and work out its length
+				    ExpandedPeriod = Table.ExpandRecordColumn(AddedReasonConditionID, "performedPeriod", {"start", "end"}, {"performedPeriod.start", "performedPeriod.end"}),
 				    ParsedDates = Table.TransformColumns(ExpandedPeriod, {
 				        {"performedPeriod.start", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone},
 				        {"performedPeriod.end", each try DateTimeZone.From(_) otherwise null, type nullable datetimezone}
@@ -216,10 +284,12 @@ table Procedure
 				        type nullable number
 				    ),
 				
-				    // Step 8: Set column types and put the columns in a readable order
+				    // Step 9: Set column types and put the columns in a readable order
 				    ChangedTypes = Table.TransformColumnTypes(AddedDurationMinutes, {
 				        {"id", type text}, {"status", type text},
 				        {"code.coding.system", type text}, {"code.coding.code", type text}, {"code.coding.display", type text},
+				        {"reasonCode.coding.system", type text}, {"reasonCode.coding.code", type text}, {"reasonCode.coding.display", type text},
+				        {"reasonReference.reference", type text}, {"reasonReference.display", type text},
 				        {"subject.reference", type text}, {"encounter.reference", type text},
 				        {"location.reference", type text}, {"location.display", type text}
 				    }),
@@ -227,8 +297,10 @@ table Procedure
 				        "id", "PatientID", "EncounterID", "status",
 				        "code.coding.system", "code.coding.code", "code.coding.display",
 				        "performedPeriod.start", "performedPeriod.end", "DurationMinutes",
+				        "reasonCode.coding.system", "reasonCode.coding.code", "reasonCode.coding.display",
+				        "ReasonConditionID", "reasonReference.display",
 				        "location.display", "location.reference",
-				        "subject.reference", "encounter.reference"
+				        "reasonReference.reference", "subject.reference", "encounter.reference"
 				    })
 				in
 				    ReorderedColumns

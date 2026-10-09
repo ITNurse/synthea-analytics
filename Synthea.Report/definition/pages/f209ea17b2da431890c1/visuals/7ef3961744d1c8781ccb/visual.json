@@ -126,6 +126,20 @@
               },
               "queryRef": "Procedure.status",
               "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Procedure"
+                    }
+                  },
+                  "Property": "reasonCode.coding.display"
+                }
+              },
+              "queryRef": "Procedure.reasonCode.coding.display",
+              "nativeQueryRef": "reasonCode.coding.display"
             }
           ]
         }
@@ -273,6 +287,20 @@
               }
             },
             "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6f8cdf6aa187f9bac3f7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Procedure"
+              }
+            },
+            "Property": "reasonCode.coding.display"
           }
         },
         "type": "Categorical"
